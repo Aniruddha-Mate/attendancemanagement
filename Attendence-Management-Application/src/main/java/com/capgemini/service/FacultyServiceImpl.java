@@ -1,5 +1,6 @@
 package com.capgemini.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,37 @@ public class FacultyServiceImpl implements FacultyService {
 		frepo.delete(entity);
 				
 		return "Deleted";
+	}
+
+	@Override
+	public FacultyEntity getFacultyById(int facultyId) {
+		
+		FacultyEntity fe = frepo.findById(facultyId).orElse(null);
+		
+		return fe;
+	}
+
+	@Override
+	public String deleteFacultyById(int facultyId) {
+		
+		FacultyEntity fe = frepo.findById(facultyId).orElse(null);
+		frepo.deleteById(facultyId);
+		return "Deleted by Id";	
+	}
+
+	@Override
+	public List<FacultyEntity> getAllFaculty() {
+		List<FacultyEntity> fe = new ArrayList<FacultyEntity>();
+		fe = frepo.findAll();		
+		return fe;
+	}
+
+	@Override
+	public FacultyEntity updateFacultyById(int facultyId, FacultyEntity se) {
+		FacultyEntity fe = frepo.findById(facultyId).orElse(null);
+		fe.setFacultyName(se.getFacultyName());
+		frepo.save(fe);
+		return fe;
 	}
 	
 	

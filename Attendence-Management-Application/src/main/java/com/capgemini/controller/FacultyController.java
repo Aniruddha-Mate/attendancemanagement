@@ -1,15 +1,20 @@
 package com.capgemini.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capgemini.entity.AttendanceEntity;
 import com.capgemini.entity.FacultyEntity;
 import com.capgemini.service.FacultyService;
 
@@ -37,10 +42,40 @@ public class FacultyController {
 	}
 	
 	@DeleteMapping(path="/deleteFaculty")
-	public String deleteFaculty(@RequestBody FacultyEntity se)
+	public ResponseEntity<String> deleteFaculty(@RequestBody FacultyEntity se)
 	{
-		String s1 = faclServices.deleteFaculty(se);
+		faclServices.deleteFaculty(se);
+		ResponseEntity re = new ResponseEntity<String>("Deleted from Database", HttpStatus.OK);
+		return re;
+	}
+	@GetMapping(path="/getFacultyById/{facultyId}")
+	public ResponseEntity<FacultyEntity> getFacultyById(@PathVariable int facultyId)
+	{
+		FacultyEntity fe = faclServices.getFacultyById(facultyId);
+		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.OK);
+		return re;
+	}
+	@DeleteMapping(path="/deleteFacultyById/{facultyId}")
+	public ResponseEntity<String> deleteFacultyById(@PathVariable int facultyId)
+	{
+		faclServices.deleteFacultyById(facultyId);
+		ResponseEntity re = new ResponseEntity<String>("Deleted by Id from Database", HttpStatus.OK);
+		return re;
+	}
+	@GetMapping(path="/getAllFaculties")
+	public ResponseEntity<List<FacultyEntity>> getAllFaculty()
+	{
 		
-		return s1;
+		List<FacultyEntity> fe = faclServices.getAllFaculty();
+		ResponseEntity re = new ResponseEntity<List<FacultyEntity>>(fe, HttpStatus.OK);
+		return re;
+		
+	}
+	@PutMapping(path="/updateFacultyById/{facultyId}")
+	public ResponseEntity<FacultyEntity> updateFacultyById(@PathVariable int facultyId, @RequestBody FacultyEntity se)
+	{
+		FacultyEntity fe = faclServices.updateFacultyById(facultyId, se);
+		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.OK);
+		return re;
 	}
 }
