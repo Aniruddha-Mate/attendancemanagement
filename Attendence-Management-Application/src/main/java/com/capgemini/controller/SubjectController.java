@@ -31,14 +31,6 @@ public class SubjectController {
 		
 		return new ResponseEntity<SubjectEntity>(se1,HttpStatus.OK);
 	}
-
-	@PutMapping(path="/updateSubject")
-	public ResponseEntity<SubjectEntity> updateSubject(@RequestBody SubjectEntity se)
-	{
-		SubjectEntity se2 = subServices.updateSubject(se);
-		
-		return new ResponseEntity<SubjectEntity>(se2,HttpStatus.OK);
-	}
 	
 	@DeleteMapping(path="/deleteSubject")
 	public String deleteSubject(@RequestBody SubjectEntity se)

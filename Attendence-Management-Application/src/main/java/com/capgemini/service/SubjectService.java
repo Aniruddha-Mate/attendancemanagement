@@ -8,8 +8,6 @@ public interface SubjectService {
 	
 	public SubjectEntity addSubject(SubjectEntity entity);
 	
-	public SubjectEntity updateSubject(SubjectEntity entity);
-	
 	public String deleteSubject(SubjectEntity entity);
 
 	SubjectEntity getSubjectById(int subjectId);
