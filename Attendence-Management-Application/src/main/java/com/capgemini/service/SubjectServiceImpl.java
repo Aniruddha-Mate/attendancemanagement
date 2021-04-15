@@ -28,9 +28,9 @@ public class SubjectServiceImpl implements SubjectService{
 		return "Deleted";
 	}
 	@Override
-	public String deleteSubById(int id) {
-		SubjectEntity se=srepo.findById(id).orElse(null);
-		srepo.deleteById(id);
+	public String deleteSubById(int subjectId) {
+		SubjectEntity se=srepo.findById(subjectId).orElse(null);
+		srepo.deleteById(subjectId);
 		return "Deleted";
 	}
 	@Override
