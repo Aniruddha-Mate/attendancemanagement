@@ -2,6 +2,8 @@ package com.capgemini.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,19 +27,19 @@ public class AttendanceController {
 	AttendanceService attService;
 	
 	@PostMapping(path="/addAttendance")
-	public ResponseEntity<AttendanceEntity> addAttend(@RequestBody AttendanceEntity ae)
+	public ResponseEntity<AttendanceEntity> addAttend(@Valid @RequestBody AttendanceEntity ae)
 	{
 		return new ResponseEntity<AttendanceEntity>(attService.addAttendance(ae),HttpStatus.OK);
 	}
 	
 	@PutMapping(path="/updateAttendance/{attendanceId}")
-	public ResponseEntity<AttendanceEntity> updateAttendById(@PathVariable int attendanceId, @RequestBody AttendanceEntity entity)
+	public ResponseEntity<AttendanceEntity> updateAttendById(@Valid @PathVariable int attendanceId, @Valid @RequestBody AttendanceEntity entity)
 	{
 		return new ResponseEntity<AttendanceEntity>(attService.updateAttendanceById(attendanceId,entity),HttpStatus.OK);
 	}
 	
 	@DeleteMapping(path="/deleteAttendance")
-	public String deleteAttend(@RequestBody AttendanceEntity ae)
+	public String deleteAttend(@Valid @RequestBody AttendanceEntity ae)
 	{
 		return  attService.deleteAttendance(ae);
 	}
@@ -47,14 +49,14 @@ public class AttendanceController {
 		return new ResponseEntity<List<AttendanceEntity>>(attService.getAttendance(),HttpStatus.OK);
 	}
 	@GetMapping(path="/getAttendanceById/{attendanceId}")
-	public ResponseEntity<AttendanceEntity> getAttendanceById(@PathVariable int attendanceId)
+	public ResponseEntity<AttendanceEntity> getAttendanceById(@Valid @PathVariable int attendanceId)
 	{
 		AttendanceEntity ae = attService.getAttendanceById(attendanceId);
 		ResponseEntity re = new ResponseEntity<AttendanceEntity>(ae, HttpStatus.OK);
 		return re;
 	}
 	@DeleteMapping(path="/deleteAttendance/{attendanceId}")
-	public String deleteAttendanceById(@PathVariable int attendanceId)
+	public String deleteAttendanceById(@Valid @PathVariable int attendanceId)
 	{
 		return attService.deleteById(attendanceId);
 	}

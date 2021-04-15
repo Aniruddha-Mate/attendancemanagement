@@ -22,44 +22,44 @@ import com.capgemini.service.StudentService;
 public class StudentController {
 	
 	@Autowired
-	StudentService stdsvc;
+	StudentService studService;
 	
 	@GetMapping("/get/{studentId}")
 	public ResponseEntity<StudentEntity> getStudentById(@Valid @PathVariable int studentId)
 	{
-		return new ResponseEntity<StudentEntity>(stdsvc.getStudentById(studentId),HttpStatus.FOUND);
+		return new ResponseEntity<StudentEntity>(studService.getStudentById(studentId),HttpStatus.FOUND);
 	}
 	
 	@GetMapping("/get")
 	public ResponseEntity<List<StudentEntity>> getStudents()
 	{
-		return new ResponseEntity<List<StudentEntity>>(stdsvc.getStudents(),HttpStatus.OK);
+		return new ResponseEntity<List<StudentEntity>>(studService.getStudents(),HttpStatus.OK);
 	}
 	
 	@PostMapping("/add")
 	public ResponseEntity<StudentEntity> addStudent(@Valid @RequestBody StudentEntity entity)
 	{
-		return new ResponseEntity<StudentEntity>(stdsvc.addStudent(entity),HttpStatus.CREATED);
+		return new ResponseEntity<StudentEntity>(studService.addStudent(entity),HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/update")
 	public ResponseEntity<StudentEntity> updateStudent(@Valid @RequestBody StudentEntity entity)
 	{
-		return new ResponseEntity<StudentEntity>(stdsvc.updateStudent(entity),HttpStatus.ACCEPTED);
+		return new ResponseEntity<StudentEntity>(studService.updateStudent(entity),HttpStatus.ACCEPTED);
 	}
 	
 
 	@DeleteMapping("/delete/{studentId}")
 	public ResponseEntity<String> deleteStudent(@Valid @PathVariable int studentId) 
 	{
-		return new ResponseEntity<String>(stdsvc.deleteStudent(studentId),HttpStatus.ACCEPTED);
+		return new ResponseEntity<String>(studService.deleteStudent(studentId),HttpStatus.ACCEPTED);
 	}
 	
 	
 	@DeleteMapping("/deleteStudents")
 	public ResponseEntity<String> deleteRecord(@Valid @RequestBody StudentEntity s)
 	{
-		stdsvc.deleteRecord(s);
+		studService.deleteRecord(s);
 		return new ResponseEntity<String>("Deleted",HttpStatus.OK);
 
 	}

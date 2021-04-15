@@ -34,6 +34,7 @@ public class AttendanceServiceImpl implements AttendanceService{
 		AttendanceEntity ae = arepo.findById(attendanceId).orElse(null);
 	    ae.setSemester(entity.getSemester());
 	    ae.setStatus(entity.getStatus());
+	    ae.setCurrentDate(entity.getCurrentDate());
 	    arepo.save(ae);
 	    return ae;
 	}

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -22,8 +24,11 @@ public class CourseEntity {
 	private int courseId;
 	
 	@Column(name = "course_name")
+	@NotEmpty(message="Please Enter Valid Course Name")
 	private String courseName;
 
+	@NotEmpty
+	@Size(min = 10, max = 50, message = "Please Enter Valid Course Description")
 	private String description;
 	
 	/*

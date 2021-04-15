@@ -1,6 +1,6 @@
 package com.capgemini.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Attendances")
@@ -21,10 +22,12 @@ public class AttendanceEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int attendanceId;
 
+	@NotEmpty(message="Please Enter Valid Semester")
 	private String semester;
 	
-	//private Date date;
+	private Date currentDate;
 	
+	@NotEmpty(message="Please Enter Valid Status (Present/Absent)")
 	private String status;
 	
 	public int getAttendanceId() {
@@ -43,11 +46,11 @@ public class AttendanceEntity {
 		this.semester = semester;
 	}
 
-	/*
-	 * public Date getDate() { return date; }
-	 * 
-	 * public void setDate(Date date) { this.date = date; }
-	 */
+	
+	  public Date getCurrentDate() { return currentDate; }
+	  
+	  public void setCurrentDate(Date currentDate) { this.currentDate = currentDate; }
+	 
 
 	public String getStatus() {
 		return status;

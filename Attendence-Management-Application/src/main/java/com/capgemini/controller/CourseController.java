@@ -2,6 +2,8 @@ package com.capgemini.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ public class CourseController {
 	CourseService courServices;
 	
 	@PostMapping(path="/addCourse")
-	public ResponseEntity<CourseEntity> addCourse(@RequestBody CourseEntity se)
+	public ResponseEntity<CourseEntity> addCourse(@Valid @RequestBody CourseEntity se)
 	{
 		CourseEntity se1 = courServices.addCourse(se);
 		
@@ -35,13 +37,13 @@ public class CourseController {
 
 		
 	@PutMapping(path="/updateCourse/{courseId}")
-	public ResponseEntity<CourseEntity> updateByCourseId(@PathVariable int courseId, @RequestBody CourseEntity entity)
+	public ResponseEntity<CourseEntity> updateByCourseId(@Valid @PathVariable int courseId, @Valid @RequestBody CourseEntity entity)
 	{
 		return new ResponseEntity<CourseEntity>(courServices.updateByCourseId(courseId,entity),HttpStatus.OK);
 	}
 	
 	@DeleteMapping(path="/deleteByCourseId/{courseId}")
-	public String deleteByCourseId(@PathVariable int courseId)
+	public String deleteByCourseId(@Valid @PathVariable int courseId)
 	{
 	
 		courServices.deleteByCourseId(courseId);
@@ -55,7 +57,7 @@ public class CourseController {
 	}
 	
 	@GetMapping(path="/getByCourseId/{courseId}")
-	public ResponseEntity<CourseEntity> getCourseById(@PathVariable int courseId)
+	public ResponseEntity<CourseEntity> getCourseById(@Valid @PathVariable int courseId)
 	{
 		return new ResponseEntity<CourseEntity>(courServices.getCourseById(courseId),HttpStatus.OK);
 	}
