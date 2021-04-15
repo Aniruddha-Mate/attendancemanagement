@@ -1,6 +1,6 @@
 package com.capgemini.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,13 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="Students")
 public class StudentEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int rollNo;
+	@Column(name = "roll_no")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -41,13 +43,17 @@ public class StudentEntity {
 	
 	@Column(name = "father_mobile_number")
 	private long fatherMobileNumber;
+	
+	private int subjectId;
+	
+	private String subjectName;
 
-	public int getRollNo() {
-		return rollNo;
+	public int getId() {
+		return id;
 	}
 
-	public void setRollNo(int rollNo) {
-		this.rollNo = rollNo;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -122,12 +128,28 @@ public class StudentEntity {
 		this.fatherMobileNumber = fatherMobileNumber;
 	}
 
-	@Override
-	public String toString() {
-		return "StudentEntity [rollNo=" + rollNo + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + ", mobileNumber=" + mobileNumber
-				+ ", semester=" + semester + ", emailId=" + emailId + ", fatherEmailId=" + fatherEmailId
-				+ ", fatherMobileNumber=" + fatherMobileNumber + "]";
+	public int getSubjectId() {
+		return subjectId;
 	}
 
+	public void setSubjectId(int subjectId) {
+		this.subjectId = subjectId;
+	}
+
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
+	@Override
+	public String toString() {
+		return "StudentEntity [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
+				+ dateOfBirth + ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", semester=" + semester
+				+ ", emailId=" + emailId + ", fatherEmailId=" + fatherEmailId + ", fatherMobileNumber="
+				+ fatherMobileNumber + ", subjectId=" + subjectId + ", subjectName=" + subjectName + "]";
+	}
+	
 }
