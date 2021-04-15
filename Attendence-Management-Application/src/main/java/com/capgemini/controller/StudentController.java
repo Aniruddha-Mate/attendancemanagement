@@ -22,10 +22,10 @@ public class StudentController {
 	@Autowired
 	StudentService stdsvc;
 	
-	@GetMapping("/get/{id}")
-	public ResponseEntity<StudentEntity> getStudentById(@PathVariable int id)
+	@GetMapping("/get/{studentId}")
+	public ResponseEntity<StudentEntity> getStudentById(@PathVariable int studentId)
 	{
-		return new ResponseEntity<StudentEntity>(stdsvc.getStudentById(id),HttpStatus.FOUND);
+		return new ResponseEntity<StudentEntity>(stdsvc.getStudentById(studentId),HttpStatus.FOUND);
 	}
 	
 	@GetMapping("/get")
@@ -47,10 +47,10 @@ public class StudentController {
 	}
 	
 
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<String> deleteStudent(@PathVariable int id) 
+	@DeleteMapping("/delete/{studentId}")
+	public ResponseEntity<String> deleteStudent(@PathVariable int studentId) 
 	{
-		return new ResponseEntity<String>(stdsvc.deleteStudent(id),HttpStatus.ACCEPTED);
+		return new ResponseEntity<String>(stdsvc.deleteStudent(studentId),HttpStatus.ACCEPTED);
 	}
 	
 	

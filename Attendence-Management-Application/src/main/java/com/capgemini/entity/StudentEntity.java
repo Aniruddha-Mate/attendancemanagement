@@ -17,7 +17,7 @@ public class StudentEntity {
 	@Id
 	@Column(name = "roll_no")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private int studentId;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -49,11 +49,11 @@ public class StudentEntity {
 	private String subjectName;
 
 	public int getId() {
-		return id;
+		return studentId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int studentId) {
+		this.studentId = studentId;
 	}
 
 	public String getFirstName() {
@@ -146,7 +146,7 @@ public class StudentEntity {
 
 	@Override
 	public String toString() {
-		return "StudentEntity [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
+		return "StudentEntity [studentId=" + studentId + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", semester=" + semester
 				+ ", emailId=" + emailId + ", fatherEmailId=" + fatherEmailId + ", fatherMobileNumber="
 				+ fatherMobileNumber + ", subjectId=" + subjectId + ", subjectName=" + subjectName + "]";

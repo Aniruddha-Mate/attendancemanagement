@@ -13,9 +13,9 @@ public class StudentServiceImpl implements StudentService{
 	StudentRepository std;
 
 	@Override
-	public StudentEntity getStudentById(int id) {
+	public StudentEntity getStudentById(int studentId) {
 		// TODO Auto-generated method stub
-		StudentEntity entity=std.findById(id).orElse(null);
+		StudentEntity entity=std.findById(studentId).orElse(null);
 		return entity;
 	}
 
@@ -54,9 +54,9 @@ public class StudentServiceImpl implements StudentService{
 
 	
 	@Override
-	public String deleteStudent(int id) {
+	public String deleteStudent(int studentId) {
 		// TODO Auto-generated method stub
-		StudentEntity st=std.findById(id).orElse(null);
+		StudentEntity st=std.findById(studentId).orElse(null);
 		std.delete(st); 
 		return "deleted successfully";
 	}

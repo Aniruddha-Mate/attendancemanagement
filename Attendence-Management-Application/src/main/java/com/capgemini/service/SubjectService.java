@@ -16,6 +16,6 @@ public interface SubjectService {
 
 	List<SubjectEntity> getAllSubjects();
 
-	String deleteSubById(int id);
+	String deleteSubById(int subjectId);
 
 }

@@ -6,7 +6,7 @@ import com.capgemini.entity.StudentEntity;
 
 public interface StudentService {
 
-	public StudentEntity getStudentById(int id);
+	public StudentEntity getStudentById(int studentId);
 
 	public List<StudentEntity> getStudents();
 	
@@ -14,7 +14,7 @@ public interface StudentService {
 
 	public StudentEntity updateStudent(StudentEntity entity);
 
-	public String deleteStudent(int id);
+	public String deleteStudent(int studentId);
 
 	public String deleteRecord(StudentEntity e);
 	

@@ -64,7 +64,7 @@ public class SubjectController {
 		return re;
 		
 	}
-	@DeleteMapping(path="/deleteSubject/{id}")
+	@DeleteMapping(path="/deleteSubject/{subjectId}")
 	public ResponseEntity<String> deleteSubById(@PathVariable int subjectId)
 	{
 		subServices.deleteSubById(subjectId);
