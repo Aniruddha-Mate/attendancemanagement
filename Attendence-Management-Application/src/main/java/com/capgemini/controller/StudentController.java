@@ -24,6 +24,22 @@ public class StudentController {
 	@Autowired
 	StudentService studServices;
 	
+	@GetMapping("/getStudents")
+	public ResponseEntity<List<StudentEntity>> getStudents()
+	{
+		List<StudentEntity> le=studServices.getStudents();
+		ResponseEntity<List<StudentEntity>> re=new ResponseEntity<List<StudentEntity>>(le,HttpStatus.OK);
+		return re;
+				
+	}
+	@GetMapping("/getStudent/{id}")
+	public ResponseEntity<StudentEntity> getStudent(@PathVariable String id)
+	{
+		StudentEntity se = studServices.getStudent(Long.parseLong(id));
+		ResponseEntity<StudentEntity> re = new ResponseEntity<StudentEntity>(se,HttpStatus.OK);
+		return re;
+		
+	}
 	@PostMapping(path="/addStudent")
 	public ResponseEntity<StudentEntity> addStudent(@RequestBody StudentEntity se)
 	{
@@ -39,6 +55,13 @@ public class StudentController {
 		
 		return new ResponseEntity<StudentEntity>(se2,HttpStatus.OK);
 	}
+	@PutMapping("/updateStudent/{id}")
+	public ResponseEntity<StudentEntity> updateStudentById(@PathVariable int id)
+	{
+		StudentEntity se=studServices.updateStudentById(id);
+		ResponseEntity<StudentEntity> re = new ResponseEntity<StudentEntity>(se,HttpStatus.OK);
+		return re;
+	}
 	
 	@DeleteMapping(path="/deleteStudent")
 	public String deleteStudent(@RequestBody StudentEntity se)
@@ -46,6 +69,14 @@ public class StudentController {
 		String s1 = studServices.deleteStudent(se);
 		
 		return s1;
+	}
+	@DeleteMapping(path="/deleteStudent/{id}")
+	public ResponseEntity<String> deleteRecordById(@PathVariable int id)
+	{
+		studServices.deleteRecordById(id);
+		
+		ResponseEntity<String> re=new ResponseEntity<String>("Deleted",HttpStatus.OK);
+		return re;
 	}
 	
 	@GetMapping("/byfirstname/{firstName}")

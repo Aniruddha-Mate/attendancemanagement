@@ -51,4 +51,35 @@ public class StudentServiceImpl implements StudentService{
 		return srepo.findAllByFirstName(firstName);
 	}
 
+	@Override
+	public List<StudentEntity> getStudents() {
+		// TODO Auto-generated method stub
+		
+		return srepo.findAll();
+	}
+
+	@Override
+	public StudentEntity getStudent(long parseLong) {
+		// TODO Auto-generated method stub
+		return srepo.getOne((int) parseLong);
+	}
+
+	@Override
+	public StudentEntity updateStudentById(int id) {
+		// TODO Auto-generated method stub
+		StudentEntity se = srepo.findById(id).orElse(null);  	
+		se.setFirstName(se.getFirstName());
+		se.setLastName(se.getLastName());
+		srepo.save(se);
+		return se;
+	}
+
+	@Override
+	public String deleteRecordById(int id) {
+		// TODO Auto-generated method stub
+		srepo.findById(id).orElse(null);
+		srepo.deleteById(id);
+		return "Deleted";
+	}
+
 }

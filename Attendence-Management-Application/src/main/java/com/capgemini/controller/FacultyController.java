@@ -32,14 +32,6 @@ public class FacultyController {
 		
 		return new ResponseEntity<FacultyEntity>(se1,HttpStatus.OK);
 	}
-
-	@PutMapping(path="/updateFaculty")
-	public ResponseEntity<FacultyEntity> updateFaculty(@RequestBody FacultyEntity se)
-	{
-		FacultyEntity se2 = faclServices.updateFaculty(se);
-		
-		return new ResponseEntity<FacultyEntity>(se2,HttpStatus.OK);
-	}
 	
 	@DeleteMapping(path="/deleteFaculty")
 	public ResponseEntity<String> deleteFaculty(@RequestBody FacultyEntity se)

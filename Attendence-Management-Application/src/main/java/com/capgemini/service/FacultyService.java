@@ -8,8 +8,6 @@ public interface FacultyService {
 	
 	public FacultyEntity addFaculty(FacultyEntity entity);
 	
-	public FacultyEntity updateFaculty(FacultyEntity entity);
-	
 	public String deleteFaculty(FacultyEntity entity);
 
 	public FacultyEntity getFacultyById(int facultyId);

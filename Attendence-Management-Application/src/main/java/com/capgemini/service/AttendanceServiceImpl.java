@@ -1,5 +1,8 @@
 package com.capgemini.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +23,18 @@ public class AttendanceServiceImpl implements AttendanceService{
 	}
 
 	@Override
-	public AttendanceEntity updateAttendance(AttendanceEntity entity) {
-		int id = entity.getAttendanceId();
-		AttendanceEntity ae = (AttendanceEntity) arepo.findById(id).orElse(null);
-		//ae.setDate(entity.getDate());
-		ae.setSemester(entity.getSemester());
-		ae.setStatus(entity.getStatus());
-		arepo.save(ae);
+	public List<AttendanceEntity> getAttendance() {
+		List<AttendanceEntity> le = new ArrayList<>();
+		le = arepo.findAll();
+		return le;
+	}
+	
+	@Override
+	public AttendanceEntity updateAttendanceById(int attendanceId, AttendanceEntity entity) {
+		AttendanceEntity ae = arepo.findById(attendanceId).orElse(null);
+	    ae.setSemester(entity.getSemester());
+	    ae.setStatus(entity.getStatus());
+	    arepo.save(ae);
 	    return ae;
 	}
 
@@ -42,5 +50,10 @@ public class AttendanceServiceImpl implements AttendanceService{
 	{
 		AttendanceEntity ae = arepo.findById(attendanceId).orElse(null);		
 		return ae;
+	}
+	@Override
+	public String deleteById(int attendanceId) {
+		arepo.deleteById(attendanceId);
+		return "DELETED BY ID";
 	}
 }

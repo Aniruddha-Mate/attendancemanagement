@@ -1,5 +1,8 @@
 package com.capgemini.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,8 @@ public class CourseServiceImpl implements CourseService {
 	
 	@Autowired
 	CourseRepository crepo;
+	
+	List<CourseEntity> le;
 
 	@Override
 	public CourseEntity addCourse(CourseEntity entity) {
@@ -19,9 +24,28 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public CourseEntity updateCourse(CourseEntity entity) {
-		int id = entity.getCourseId();
-		CourseEntity ce = (CourseEntity) crepo.findById(id).orElse(null);
+	public String deleteByCourseId(int courseId) {
+		crepo.deleteById(courseId);
+	    return "Deleted By Course Id";
+	}
+
+	@Override
+	public List<CourseEntity> getCourse() {
+		le = new ArrayList<>();
+		le = crepo.findAll();
+		
+		return le;
+	}
+
+	@Override
+	public CourseEntity getCourseById(int courseId) {
+		CourseEntity ce = crepo.findById(courseId).orElse(null);
+		return ce;
+	}
+	
+	@Override
+	public CourseEntity updateByCourseId(int courseId, CourseEntity entity) {
+		CourseEntity ce = crepo.findById(courseId).orElse(null);
 		ce.setCourseName(entity.getCourseName());
 		ce.setDescription(entity.getDescription());
 		crepo.save(ce);
@@ -29,11 +53,10 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public String deleteCourse(CourseEntity entity) {
-		crepo.delete(entity);
+	public String deleteAllCourse() {
+		crepo.deleteAll();
 	    return "Deleted";
 	}
-
 
 	
 	

@@ -1,9 +1,13 @@
 package com.capgemini.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,19 +33,37 @@ public class CourseController {
 		return new ResponseEntity<CourseEntity>(se1,HttpStatus.OK);
 	}
 
-	@PutMapping(path="/updateCourse")
-	public ResponseEntity<CourseEntity> updateCourse(@RequestBody CourseEntity se)
-	{
-		CourseEntity se2 = courServices.updateCourse(se);
 		
-		return new ResponseEntity<CourseEntity>(se2,HttpStatus.OK);
+	@PutMapping(path="/updateCourse/{courseId}")
+	public ResponseEntity<CourseEntity> updateByCourseId(@PathVariable int courseId, @RequestBody CourseEntity entity)
+	{
+		return new ResponseEntity<CourseEntity>(courServices.updateByCourseId(courseId,entity),HttpStatus.OK);
 	}
 	
-	@DeleteMapping(path="/deleteCourse")
-	public String deleteCourse(@RequestBody CourseEntity se)
+	@DeleteMapping(path="/deleteByCourseId/{courseId}")
+	public String deleteByCourseId(@PathVariable int courseId)
 	{
-		String s1 = courServices.deleteCourse(se);
-		
-		return s1;
+	
+		courServices.deleteByCourseId(courseId);
+	    return "Deleted By Course Id";
+	}
+	
+	@GetMapping(path="/getAllCourse")
+	public ResponseEntity<List<CourseEntity>> getCourse()
+	{
+		return new ResponseEntity<List<CourseEntity>>(courServices.getCourse(),HttpStatus.OK);
+	}
+	
+	@GetMapping(path="/getByCourseId/{courseId}")
+	public ResponseEntity<CourseEntity> getCourseById(@PathVariable int courseId)
+	{
+		return new ResponseEntity<CourseEntity>(courServices.getCourseById(courseId),HttpStatus.OK);
+	}
+	
+	@DeleteMapping(path="/deleteAllCourse")
+	public String deleteAllCourse()
+	{
+		courServices.deleteAllCourse();
+		return "Deleted All The Data";
 	}
 }

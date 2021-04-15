@@ -13,6 +13,14 @@ public interface StudentService {
 	public String deleteStudent(StudentEntity entity);
 	
 	List<StudentEntity> getAllStudentByFirstName(String firstName);
+
+	public List<StudentEntity> getStudents();
+
+	public StudentEntity getStudent(long parseLong);
+
+	public StudentEntity updateStudentById(int id);
+
+	public String deleteRecordById(int id);
 	
 	
 	

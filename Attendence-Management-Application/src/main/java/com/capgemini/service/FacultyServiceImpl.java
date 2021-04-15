@@ -23,16 +23,6 @@ public class FacultyServiceImpl implements FacultyService {
 	}
 
 	@Override
-	public FacultyEntity updateFaculty(FacultyEntity entity) {
-		
-		int id = entity.getFacultyId();
-		FacultyEntity fe1 = (FacultyEntity) frepo.findById(id).orElse(null);
-		fe1.setFacultyName(entity.getFacultyName());
-		frepo.save(fe1);
-		return fe1;
-	}
-
-	@Override
 	public String deleteFaculty(FacultyEntity entity) {
 		frepo.delete(entity);
 				

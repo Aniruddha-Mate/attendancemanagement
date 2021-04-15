@@ -1,13 +1,21 @@
 package com.capgemini.service;
 
+import java.util.List;
+
 import com.capgemini.entity.CourseEntity;
 
 public interface CourseService {
 	
     public CourseEntity addCourse(CourseEntity entity);
 	
-	public CourseEntity updateCourse(CourseEntity entity);
+	public String deleteByCourseId(int courseId);
 	
-	public String deleteCourse(CourseEntity entity);
+	public List<CourseEntity> getCourse();
+	
+	public CourseEntity getCourseById(int courseId);
+	
+	public CourseEntity updateByCourseId(int courseid, CourseEntity entity);
+	
+	public String deleteAllCourse();
 
 }

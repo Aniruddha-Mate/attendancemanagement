@@ -1,5 +1,7 @@
 package com.capgemini.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,10 +30,10 @@ public class AttendanceController {
 		return new ResponseEntity<AttendanceEntity>(attService.addAttendance(ae),HttpStatus.OK);
 	}
 	
-	@PutMapping(path="/updateAttendance")
-	public ResponseEntity<AttendanceEntity> updateAttend(@RequestBody AttendanceEntity ae)
+	@PutMapping(path="/updateAttendance/{attendanceId}")
+	public ResponseEntity<AttendanceEntity> updateAttendById(@PathVariable int attendanceId, @RequestBody AttendanceEntity entity)
 	{
-		return new ResponseEntity<AttendanceEntity>(attService.updateAttendance(ae),HttpStatus.OK);
+		return new ResponseEntity<AttendanceEntity>(attService.updateAttendanceById(attendanceId,entity),HttpStatus.OK);
 	}
 	
 	@DeleteMapping(path="/deleteAttendance")
@@ -39,11 +41,21 @@ public class AttendanceController {
 	{
 		return  attService.deleteAttendance(ae);
 	}
+	@GetMapping(path="/getAllAttendance")
+	public ResponseEntity<List<AttendanceEntity>> getAttendance()
+	{
+		return new ResponseEntity<List<AttendanceEntity>>(attService.getAttendance(),HttpStatus.OK);
+	}
 	@GetMapping(path="/getAttendanceById/{attendanceId}")
 	public ResponseEntity<AttendanceEntity> getAttendanceById(@PathVariable int attendanceId)
 	{
 		AttendanceEntity ae = attService.getAttendanceById(attendanceId);
 		ResponseEntity re = new ResponseEntity<AttendanceEntity>(ae, HttpStatus.OK);
 		return re;
+	}
+	@DeleteMapping(path="/deleteAttendance/{attendanceId}")
+	public String deleteAttendanceById(@PathVariable int attendanceId)
+	{
+		return attService.deleteById(attendanceId);
 	}
 }
