@@ -8,6 +8,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -20,9 +29,14 @@ public class StudentEntity {
 	private int studentId;
 	
 	@Column(name = "first_name")
+	@NotEmpty
+	@Size(min=2, message="Not a valid first name")
 	private String firstName;
 	
+	
 	@Column(name = "last_name")
+	@NotEmpty
+	@Size(min=2, message="Not a valid last name")
 	private String lastName;
 	
 	@Column(name = "DOB")
@@ -31,17 +45,26 @@ public class StudentEntity {
 	private String gender;
 	
 	@Column(name = "mobile_no")
+	@NotNull
+	@Min(value = 99999999, message="invalid number")
+	@Max(value = 999999999, message="invalid number")
 	private long mobileNumber;
 	
+	@NotNull
 	private int semester;
 	
 	@Column(name = "email_id")
+	@Email(message = "invalid email")
 	private String emailId;
 	
 	@Column(name = "father_email_id")
+	@Email(message = "invalid email")
 	private String fatherEmailId;
 	
 	@Column(name = "father_mobile_number")
+	@NotNull
+	@Min(value = 99999999, message="invalid number")
+	@Max(value = 999999999, message="invalid number")
 	private long fatherMobileNumber;
 	
 	private int subjectId;

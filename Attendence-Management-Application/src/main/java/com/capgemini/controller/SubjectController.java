@@ -2,6 +2,8 @@ package com.capgemini.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ public class SubjectController {
 	SubjectService subServices;
 	
 	@PostMapping(path="/addSubject")
-	public ResponseEntity<SubjectEntity> addSubject(@RequestBody SubjectEntity se)
+	public ResponseEntity<SubjectEntity> addSubject(@Valid @RequestBody SubjectEntity se)
 	{
 		SubjectEntity se1 = subServices.addSubject(se);
 		
@@ -33,14 +35,14 @@ public class SubjectController {
 	}
 	
 	@DeleteMapping(path="/deleteSubject")
-	public String deleteSubject(@RequestBody SubjectEntity se)
+	public String deleteSubject(@Valid @RequestBody SubjectEntity se)
 	{
 		String s1 = subServices.deleteSubject(se);
 		
 		return s1;
 	}
 	@PutMapping(path="/updateSubjectById/{subjectId}")
-	public ResponseEntity<SubjectEntity> updateSubjectById(@PathVariable int subjectId, @RequestBody SubjectEntity fe)
+	public ResponseEntity<SubjectEntity> updateSubjectById(@Valid @PathVariable int subjectId, @Valid @RequestBody SubjectEntity fe)
 	{
 		SubjectEntity se = subServices.updateSubjectById(subjectId, fe);
 		ResponseEntity re = new ResponseEntity<SubjectEntity>(se, HttpStatus.OK);
@@ -48,7 +50,7 @@ public class SubjectController {
 	}
 	
 	@GetMapping(path="/getSubjectById/{subjectId}")
-	public ResponseEntity<SubjectEntity> getSubjectById(@PathVariable int subjectId)
+	public ResponseEntity<SubjectEntity> getSubjectById(@Valid @PathVariable int subjectId)
 	{
 		SubjectEntity se = subServices.getSubjectById(subjectId);
 		ResponseEntity re = new ResponseEntity<SubjectEntity>(se, HttpStatus.OK);
@@ -65,7 +67,7 @@ public class SubjectController {
 		
 	}
 	@DeleteMapping(path="/deleteSubject/{subjectId}")
-	public ResponseEntity<String> deleteSubById(@PathVariable int subjectId)
+	public ResponseEntity<String> deleteSubById(@Valid @PathVariable int subjectId)
 	{
 		subServices.deleteSubById(subjectId);
 		

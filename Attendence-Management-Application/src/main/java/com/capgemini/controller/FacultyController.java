@@ -2,6 +2,8 @@ package com.capgemini.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ public class FacultyController {
 	FacultyService faclServices;
 	
 	@PostMapping(path="/addFaculty")
-	public ResponseEntity<FacultyEntity> addFaculty(@RequestBody FacultyEntity se)
+	public ResponseEntity<FacultyEntity> addFaculty(@Valid @RequestBody FacultyEntity se)
 	{
 		FacultyEntity se1 = faclServices.addFaculty(se);
 		
@@ -34,21 +36,21 @@ public class FacultyController {
 	}
 	
 	@DeleteMapping(path="/deleteFaculty")
-	public ResponseEntity<String> deleteFaculty(@RequestBody FacultyEntity se)
+	public ResponseEntity<String> deleteFaculty(@Valid @RequestBody FacultyEntity se)
 	{
 		faclServices.deleteFaculty(se);
 		ResponseEntity re = new ResponseEntity<String>("Deleted from Database", HttpStatus.OK);
 		return re;
 	}
 	@GetMapping(path="/getFacultyById/{facultyId}")
-	public ResponseEntity<FacultyEntity> getFacultyById(@PathVariable int facultyId)
+	public ResponseEntity<FacultyEntity> getFacultyById(@Valid @PathVariable int facultyId)
 	{
 		FacultyEntity fe = faclServices.getFacultyById(facultyId);
 		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.OK);
 		return re;
 	}
 	@DeleteMapping(path="/deleteFacultyById/{facultyId}")
-	public ResponseEntity<String> deleteFacultyById(@PathVariable int facultyId)
+	public ResponseEntity<String> deleteFacultyById(@Valid @PathVariable int facultyId)
 	{
 		faclServices.deleteFacultyById(facultyId);
 		ResponseEntity re = new ResponseEntity<String>("Deleted by Id from Database", HttpStatus.OK);
@@ -64,7 +66,7 @@ public class FacultyController {
 		
 	}
 	@PutMapping(path="/updateFacultyById/{facultyId}")
-	public ResponseEntity<FacultyEntity> updateFacultyById(@PathVariable int facultyId, @RequestBody FacultyEntity se)
+	public ResponseEntity<FacultyEntity> updateFacultyById(@Valid @PathVariable int facultyId, @Valid @RequestBody FacultyEntity se)
 	{
 		FacultyEntity fe = faclServices.updateFacultyById(facultyId, se);
 		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.OK);

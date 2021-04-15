@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -22,8 +24,11 @@ public class FacultyEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int facultyId;
 	
+	
     @Column(name = "faculty_user_name") 
-	private String facultyName;
+	@NotEmpty
+	@Size(min=5, max = 30, message = "Not a valid name")
+    private String facultyName;
 
 	public int getFacultyId() {
 		return facultyId;

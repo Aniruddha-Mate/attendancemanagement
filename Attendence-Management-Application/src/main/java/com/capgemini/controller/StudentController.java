@@ -2,6 +2,8 @@ package com.capgemini.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,7 @@ public class StudentController {
 	StudentService stdsvc;
 	
 	@GetMapping("/get/{studentId}")
-	public ResponseEntity<StudentEntity> getStudentById(@PathVariable int studentId)
+	public ResponseEntity<StudentEntity> getStudentById(@Valid @PathVariable int studentId)
 	{
 		return new ResponseEntity<StudentEntity>(stdsvc.getStudentById(studentId),HttpStatus.FOUND);
 	}
@@ -35,27 +37,27 @@ public class StudentController {
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<StudentEntity> addStudent(@RequestBody StudentEntity entity)
+	public ResponseEntity<StudentEntity> addStudent(@Valid @RequestBody StudentEntity entity)
 	{
 		return new ResponseEntity<StudentEntity>(stdsvc.addStudent(entity),HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<StudentEntity> updateStudent(@RequestBody StudentEntity entity)
+	public ResponseEntity<StudentEntity> updateStudent(@Valid @RequestBody StudentEntity entity)
 	{
 		return new ResponseEntity<StudentEntity>(stdsvc.updateStudent(entity),HttpStatus.ACCEPTED);
 	}
 	
 
 	@DeleteMapping("/delete/{studentId}")
-	public ResponseEntity<String> deleteStudent(@PathVariable int studentId) 
+	public ResponseEntity<String> deleteStudent(@Valid @PathVariable int studentId) 
 	{
 		return new ResponseEntity<String>(stdsvc.deleteStudent(studentId),HttpStatus.ACCEPTED);
 	}
 	
 	
 	@DeleteMapping("/deleteStudents")
-	public ResponseEntity<String> deleteRecord(@RequestBody StudentEntity s)
+	public ResponseEntity<String> deleteRecord(@Valid @RequestBody StudentEntity s)
 	{
 		stdsvc.deleteRecord(s);
 		return new ResponseEntity<String>("Deleted",HttpStatus.OK);
