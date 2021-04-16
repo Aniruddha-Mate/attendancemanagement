@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -19,7 +20,8 @@ import javax.validation.constraints.NotEmpty;
 public class AttendanceEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="attendances_generations")
+	@SequenceGenerator(name="attendances_generations", sequenceName = "attendances_sequences", allocationSize=1)	
 	private int attendanceId;
 
 	@NotEmpty(message="Please Enter Valid Semester")

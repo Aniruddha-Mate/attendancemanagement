@@ -22,8 +22,8 @@ import javax.validation.constraints.Size;
 public class FacultyEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="faculties_gen")
-	@SequenceGenerator(name="faculties_gen", sequenceName = "faculties_sequence", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="faculties_generations")
+	@SequenceGenerator(name="faculties_generations", sequenceName = "faculties_sequences", allocationSize=1)
 	private int facultyId;
 	
 	

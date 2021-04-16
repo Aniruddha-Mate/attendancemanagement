@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -20,7 +21,8 @@ import javax.validation.constraints.Size;
 public class CourseEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="courses_generations")
+	@SequenceGenerator(name="courses_generations", sequenceName = "courses_sequences", allocationSize=1)	
 	private int courseId;
 	
 	@Column(name = "course_name")

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
@@ -26,7 +27,8 @@ public class StudentEntity {
 	
 	@Id
 	@Column(name = "roll_no")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="students_generations")
+	@SequenceGenerator(name="students_generations", sequenceName = "students_sequences", allocationSize=1)	
 	private int studentId;
 	
 	@Column(name = "first_name")
