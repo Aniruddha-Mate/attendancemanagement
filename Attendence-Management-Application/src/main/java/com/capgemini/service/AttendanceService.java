@@ -10,8 +10,6 @@ public interface AttendanceService {
 	
 	public AttendanceEntity addAttendance(AttendanceEntity entity);
 	
-	public String deleteAttendance(AttendanceEntity entity);
-	
 	public AttendanceEntity getAttendanceById(int attendanceId);
 
 	public AttendanceEntity updateAttendanceById(int attendanceId, AttendanceEntity entity);

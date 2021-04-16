@@ -36,41 +36,33 @@ public class FacultyController {
 		return new ResponseEntity<FacultyEntity>(se1,HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping(path="/deleteFaculty")
-	public ResponseEntity<String> deleteFaculty(@Valid @RequestBody FacultyEntity se)
-	{
-		faclServices.deleteFaculty(se);
-		ResponseEntity re = new ResponseEntity<String>("Deleted from Database", HttpStatus.OK);
-		return re;
-	}
 	@GetMapping(path="/getFacultyById/{facultyId}")
 	public ResponseEntity<FacultyEntity> getFacultyById(@Valid @PathVariable int facultyId) throws FacultyNotFoundException
 	{
 		FacultyEntity fe = faclServices.getFacultyById(facultyId);
-		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.FOUND);
-		return re;
+		return new ResponseEntity<FacultyEntity>(fe, HttpStatus.FOUND);
 	}
+	
 	@DeleteMapping(path="/deleteFacultyById/{facultyId}")
 	public ResponseEntity<String> deleteFacultyById(@Valid @PathVariable int facultyId) throws RecordNotFoundException
 	{
 		faclServices.deleteFacultyById(facultyId);
-		ResponseEntity re = new ResponseEntity<String>("Deleted by Id from Database", HttpStatus.OK);
-		return re;
+		return new ResponseEntity<String>("Deleted by Id from Database", HttpStatus.OK);
 	}
+	
 	@GetMapping(path="/getAllFaculties")
 	public ResponseEntity<List<FacultyEntity>> getAllFaculty()
 	{
 		
 		List<FacultyEntity> fe = faclServices.getAllFaculty();
-		ResponseEntity re = new ResponseEntity<List<FacultyEntity>>(fe, HttpStatus.OK);
-		return re;
+		return new ResponseEntity<List<FacultyEntity>>(fe, HttpStatus.OK);
 		
 	}
+	
 	@PutMapping(path="/updateFacultyById/{facultyId}")
 	public ResponseEntity<FacultyEntity> updateFacultyById(@Valid @PathVariable int facultyId, @Valid @RequestBody FacultyEntity se) throws FacultyNotFoundException
 	{
 		FacultyEntity fe = faclServices.updateFacultyById(facultyId, se);
-		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.ACCEPTED);
-		return re;
+		return new ResponseEntity<FacultyEntity>(fe, HttpStatus.ACCEPTED);
 	}
 }

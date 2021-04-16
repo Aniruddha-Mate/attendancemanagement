@@ -37,27 +37,20 @@ public class SubjectController {
 		return new ResponseEntity<SubjectEntity>(se1,HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping(path="/deleteSubject")
-	public String deleteSubject(@Valid @RequestBody SubjectEntity se)
-	{
-		String s1 = subServices.deleteSubject(se);
-		
-		return s1;
-	}
 	@PutMapping(path="/updateSubjectById/{subjectId}")
 	public ResponseEntity<SubjectEntity> updateSubjectById(@Valid @PathVariable int subjectId, @Valid @RequestBody SubjectEntity fe) throws SubjectNotFoundException
 	{
 		SubjectEntity se = subServices.updateSubjectById(subjectId, fe);
-		ResponseEntity re = new ResponseEntity<SubjectEntity>(se, HttpStatus.ACCEPTED);
-		return re;
+		return new ResponseEntity<SubjectEntity>(se, HttpStatus.ACCEPTED);
+		
 	}
 	
 	@GetMapping(path="/getSubjectById/{subjectId}")
 	public ResponseEntity<SubjectEntity> getSubjectById(@Valid @PathVariable int subjectId) throws SubjectNotFoundException
 	{
 		SubjectEntity se = subServices.getSubjectById(subjectId);
-		ResponseEntity re = new ResponseEntity<SubjectEntity>(se, HttpStatus.FOUND);
-		return re;
+		return new ResponseEntity<SubjectEntity>(se, HttpStatus.FOUND);
+		
 	}
 	
 	@GetMapping(path="/getAllSubjects")
@@ -65,8 +58,7 @@ public class SubjectController {
 	{
 		
 		List<SubjectEntity> se = subServices.getAllSubjects();
-		ResponseEntity re = new ResponseEntity<List<SubjectEntity>>(se, HttpStatus.OK);
-		return re;
+		return new ResponseEntity<List<SubjectEntity>>(se, HttpStatus.OK);
 		
 	}
 	@DeleteMapping(path="/deleteSubject/{subjectId}")
@@ -74,7 +66,6 @@ public class SubjectController {
 	{
 		subServices.deleteSubById(subjectId);
 		
-		ResponseEntity re=new ResponseEntity<String>("Deleted",HttpStatus.OK);
-		return re;
+		return new ResponseEntity<String>("Deleted",HttpStatus.OK);
 	}
 }

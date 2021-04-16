@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.entity.SubjectEntity;
 import com.capgemini.exception.DuplicateRecordException;
-import com.capgemini.exception.RecordNotFoundException;
-import com.capgemini.exception.StudentNotFoundException;
 import com.capgemini.exception.SubjectNotFoundException;
 import com.capgemini.repository.SubjectRepository;
 
@@ -33,23 +31,14 @@ public class SubjectServiceImpl implements SubjectService{
 		SubjectEntity subjectentity = (SubjectEntity) subjectRepository.save(entity);		
 		return subjectentity;
 	}
-
-	@Override
-	public String deleteSubject(SubjectEntity entity) {
-		subjectRepository.delete(entity);
-		return "Deleted";
+	
+	@Override 
+	public String deleteSubById(int subjectId) 
+	{
+		subjectRepository.findById(subjectId).orElse(null); 
+		subjectRepository.deleteById(subjectId);
+		return "Deleted"; 
 	}
-	
-	  @Override 
-	  public String deleteSubById(int subjectId) 
-	  {
-		  subjectRepository.findById(subjectId).orElse(null); 
-		  subjectRepository.deleteById(subjectId);
-		  return "Deleted"; 
-	  }
-	 
-	
-	
 	
 	@Override
 	public SubjectEntity getSubjectById(int subjectId) throws SubjectNotFoundException {

@@ -44,10 +44,10 @@ public class StudentController {
 		return new ResponseEntity<StudentEntity>(studService.addStudent(entity),HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/update")
-	public ResponseEntity<StudentEntity> updateStudent(@Valid @RequestBody StudentEntity entity)
+	@PutMapping("/update/{studentId}")
+	public ResponseEntity<StudentEntity> updateStudent(@Valid @PathVariable int studentId, @Valid @RequestBody StudentEntity entity) throws StudentNotFoundException
 	{
-		return new ResponseEntity<StudentEntity>(studService.updateStudent(entity),HttpStatus.ACCEPTED);
+		return new ResponseEntity<StudentEntity>(studService.updateStudent(studentId, entity),HttpStatus.ACCEPTED);
 	}
 	
 
@@ -55,15 +55,6 @@ public class StudentController {
 	public ResponseEntity<String> deleteStudent(@Valid @PathVariable int studentId) throws RecordNotFoundException
 	{
 		return new ResponseEntity<String>(studService.deleteStudent(studentId),HttpStatus.ACCEPTED);
-	}
-	
-	
-	@DeleteMapping("/deleteStudents")
-	public ResponseEntity<String> deleteRecord(@Valid @RequestBody StudentEntity s)
-	{
-		studService.deleteRecord(s);
-		return new ResponseEntity<String>("Deleted",HttpStatus.OK);
-
 	}
 
 

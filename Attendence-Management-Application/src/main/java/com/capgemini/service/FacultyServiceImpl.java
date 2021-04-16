@@ -26,13 +26,6 @@ public class FacultyServiceImpl implements FacultyService {
 	}
 
 	@Override
-	public String deleteFaculty(FacultyEntity entity) {
-		facultyRepository.delete(entity);
-				
-		return "Deleted";
-	}
-
-	@Override
 	public FacultyEntity getFacultyById(int facultyId) throws FacultyNotFoundException{
 		
 		Supplier<FacultyNotFoundException> supplier=()->new FacultyNotFoundException("This Faculty is not present");

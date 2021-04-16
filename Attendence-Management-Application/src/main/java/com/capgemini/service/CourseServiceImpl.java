@@ -52,15 +52,4 @@ public class CourseServiceImpl implements CourseService {
 		return ce;
 	}
 
-	@Override
-	public String deleteAllCourse() {
-		crepo.deleteAll();
-	    return "Deleted";
-	}
-
-	
-	
-	
-	
-
 }

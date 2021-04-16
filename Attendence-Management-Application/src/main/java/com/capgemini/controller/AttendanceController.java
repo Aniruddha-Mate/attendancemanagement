@@ -38,23 +38,20 @@ public class AttendanceController {
 		return new ResponseEntity<AttendanceEntity>(attService.updateAttendanceById(attendanceId,entity),HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping(path="/deleteAttendance")
-	public String deleteAttend(@Valid @RequestBody AttendanceEntity ae)
-	{
-		return  attService.deleteAttendance(ae);
-	}
 	@GetMapping(path="/getAllAttendance")
 	public ResponseEntity<List<AttendanceEntity>> getAttendance()
 	{
 		return new ResponseEntity<List<AttendanceEntity>>(attService.getAttendance(),HttpStatus.OK);
 	}
+	
 	@GetMapping(path="/getAttendanceById/{attendanceId}")
 	public ResponseEntity<AttendanceEntity> getAttendanceById(@Valid @PathVariable int attendanceId)
 	{
 		AttendanceEntity ae = attService.getAttendanceById(attendanceId);
-		ResponseEntity re = new ResponseEntity<AttendanceEntity>(ae, HttpStatus.FOUND);
-		return re;
+		return new ResponseEntity<AttendanceEntity>(ae, HttpStatus.FOUND);
+		
 	}
+	
 	@DeleteMapping(path="/deleteAttendance/{attendanceId}")
 	public String deleteAttendanceById(@Valid @PathVariable int attendanceId)
 	{

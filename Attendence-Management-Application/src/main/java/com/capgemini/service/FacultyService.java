@@ -9,8 +9,6 @@ import com.capgemini.exception.RecordNotFoundException;
 public interface FacultyService {
 	
 	public FacultyEntity addFaculty(FacultyEntity entity);
-	
-	public String deleteFaculty(FacultyEntity entity);
 
 	public FacultyEntity getFacultyById(int facultyId) throws FacultyNotFoundException;
 

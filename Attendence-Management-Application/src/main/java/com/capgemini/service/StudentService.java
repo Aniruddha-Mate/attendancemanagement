@@ -14,12 +14,8 @@ public interface StudentService {
 	
 	public StudentEntity addStudent(StudentEntity entity);
 
-	public StudentEntity updateStudent(StudentEntity entity);
+	public StudentEntity updateStudent(int studentId, StudentEntity entity) throws StudentNotFoundException;
 
-	public String deleteStudent(int studentId) throws RecordNotFoundException;
-
-	public String deleteRecord(StudentEntity e);
-	
-	
+	public String deleteStudent(int studentId) throws RecordNotFoundException;	
 
 }

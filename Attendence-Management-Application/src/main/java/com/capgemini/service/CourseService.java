@@ -15,7 +15,5 @@ public interface CourseService {
 	public CourseEntity getCourseById(int courseId);
 	
 	public CourseEntity updateByCourseId(int courseid, CourseEntity entity);
-	
-	public String deleteAllCourse();
 
 }

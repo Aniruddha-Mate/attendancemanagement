@@ -10,8 +10,6 @@ import com.capgemini.exception.SubjectNotFoundException;
 public interface SubjectService {
 	
 	public SubjectEntity addSubject(SubjectEntity entity) throws DuplicateRecordException;
-	
-	public String deleteSubject(SubjectEntity entity);
 
 	SubjectEntity getSubjectById(int subjectId) throws SubjectNotFoundException;
 

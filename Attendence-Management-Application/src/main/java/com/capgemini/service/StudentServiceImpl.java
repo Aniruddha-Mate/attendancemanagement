@@ -36,11 +36,10 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public StudentEntity updateStudent(StudentEntity entity) {
-		// TODO Auto-generated method stub
-		int Id=entity.getId();
-	
-		StudentEntity se = studentRepository.findById(Id).orElse(null);
+	public StudentEntity updateStudent(int studentId, StudentEntity entity) throws StudentNotFoundException{
+		
+		Supplier<StudentNotFoundException> supplier=()->new StudentNotFoundException("No such Student Found");
+		StudentEntity se = studentRepository.findById(studentId).orElseThrow(supplier);
 		se.setFirstName(entity.getFirstName());
 		se.setLastName(entity.getLastName());
 		se.setDateOfBirth(entity.getDateOfBirth());
@@ -62,13 +61,6 @@ public class StudentServiceImpl implements StudentService{
 		Supplier<RecordNotFoundException> supplier=()->new RecordNotFoundException("no Student_id was found");
 		StudentEntity st=studentRepository.findById(studentId).orElseThrow(supplier);
 		studentRepository.delete(st); 
-		return "deleted successfully";
-	}
-
-	@Override
-	public String deleteRecord(StudentEntity e) {
-		// TODO Auto-generated method stub
-		studentRepository.deleteAll();
 		return "deleted successfully";
 	}
 

@@ -62,10 +62,4 @@ public class CourseController {
 		return new ResponseEntity<CourseEntity>(courServices.getCourseById(courseId),HttpStatus.FOUND);
 	}
 	
-	@DeleteMapping(path="/deleteAllCourse")
-	public String deleteAllCourse()
-	{
-		courServices.deleteAllCourse();
-		return "Deleted All The Data";
-	}
 }

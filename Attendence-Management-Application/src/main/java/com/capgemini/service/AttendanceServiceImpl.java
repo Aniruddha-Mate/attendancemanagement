@@ -40,13 +40,6 @@ public class AttendanceServiceImpl implements AttendanceService{
 	}
 
 	@Override
-	public String deleteAttendance(AttendanceEntity entity) {
-		arepo.delete(entity);
-	
-		return "Deleted";
-	}
-	
-	@Override
 	public AttendanceEntity getAttendanceById(int attendanceId) 
 	{
 		AttendanceEntity ae = arepo.findById(attendanceId).orElse(null);		
