@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.capgemini.entity.SubjectEntity;
 import com.capgemini.exception.DuplicateRecordException;
 import com.capgemini.exception.SubjectNotFoundException;
+import com.capgemini.repository.CourseRepository;
+import com.capgemini.repository.FacultyRepository;
 import com.capgemini.repository.SubjectRepository;
 
 @Service
@@ -17,6 +19,12 @@ public class SubjectServiceImpl implements SubjectService{
 	
 	@Autowired
 	SubjectRepository subjectRepository;
+	
+	@Autowired
+	FacultyRepository facultyRepository;
+	
+	@Autowired
+	CourseRepository courseRepository;
 	
 	@Override
 	public SubjectEntity addSubject(SubjectEntity entity) throws DuplicateRecordException{
@@ -28,6 +36,9 @@ public class SubjectServiceImpl implements SubjectService{
 				throw new DuplicateRecordException("The name of Subject is already exist......Provide different SubjectName");
 			}
 		}
+		
+		
+		
 		SubjectEntity subjectentity = (SubjectEntity) subjectRepository.save(entity);		
 		return subjectentity;
 	}
@@ -60,6 +71,8 @@ public class SubjectServiceImpl implements SubjectService{
 		se.setSubjectName(fe.getSubjectName());
 		se.setSubject_semester(fe.getSubject_semester());
 		se.setDescription(fe.getDescription());
+		se.setCourse(fe.getCourse());
+		
 		subjectRepository.save(se);
 		return se;
 	}

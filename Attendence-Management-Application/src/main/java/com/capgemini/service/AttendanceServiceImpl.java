@@ -51,6 +51,9 @@ public class AttendanceServiceImpl implements AttendanceService{
 		AttendanceEntity attendanceEntity = attendanceRepository.findById(attendanceId).orElseThrow(supplier);
 		attendanceEntity.setSemester(entity.getSemester());
 		attendanceEntity.setStatus(entity.getStatus());
+		attendanceEntity.setStudent(entity.getStudent());
+		attendanceEntity.setCurrentDate(entity.getCurrentDate());
+		
 	    attendanceRepository.save(attendanceEntity);
 	    return attendanceEntity;
 	}

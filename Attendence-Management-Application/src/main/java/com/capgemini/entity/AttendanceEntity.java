@@ -17,6 +17,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -38,17 +40,22 @@ public class AttendanceEntity {
     @Pattern(regexp="(absent|Absent|present|Present)", message="Please enter valid Status")
 	private String status;
     
-    @ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+    
+    @ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="roll_no")
-	private StudentEntity student;
+	private StudentEntity studententity;
     
+    public int getStudentId() {
+    	return studententity.getStudentId();
+    }
     
+    @JsonIgnore
     public StudentEntity getStudent() {
-		return student;
+		return studententity;
 	}
-
+    @JsonIgnore
 	public void setStudent(StudentEntity student) {
-		this.student = student;
+		this.studententity = student;
 	}
 
 	public int getAttendanceId() {
@@ -92,13 +99,17 @@ public class AttendanceEntity {
 		this.semester = semester;
 		this.currentDate = currentDate;
 		this.status = status;
-		this.student = student;
+		this.studententity = student;
+	}
+
+	public AttendanceEntity() {
+		super();
 	}
 
 	@Override
 	public String toString() {
 		return "AttendanceEntity [attendanceId=" + attendanceId + ", semester=" + semester + ", currentDate="
-				+ currentDate + ", status=" + status + ", student=" + student + "]";
+				+ currentDate + ", status=" + status + ", student=" + studententity + "]";
 	}
 	
 	

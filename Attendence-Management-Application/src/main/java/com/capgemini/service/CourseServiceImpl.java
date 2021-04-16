@@ -53,6 +53,9 @@ public class CourseServiceImpl implements CourseService {
 		CourseEntity ce = courseRepository.findById(courseId).orElseThrow(supplier);
 		ce.setCourseName(entity.getCourseName());
 		ce.setDescription(entity.getDescription());
+		ce.setSubList(entity.getSubList());
+		
+		
 		courseRepository.save(ce);
 		return ce;
 	}

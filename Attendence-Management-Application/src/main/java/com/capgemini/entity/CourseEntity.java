@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "Courses")
@@ -33,7 +35,8 @@ public class CourseEntity {
 	@Size(min = 10, max = 100, message = "Description length should be between 10 to 100 characters")
 	private String description;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="Course")
+	@JsonIgnore
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="course")
 	private List<SubjectEntity> subList;
 
 	public List<SubjectEntity> getSubList() {
@@ -77,6 +80,11 @@ public class CourseEntity {
 		this.courseName = courseName;
 		this.description = description;
 		this.subList = subList;
+	}
+	
+
+	public CourseEntity() {
+		super();
 	}
 
 	@Override

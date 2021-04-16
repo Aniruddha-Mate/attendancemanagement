@@ -49,8 +49,9 @@ public class StudentServiceImpl implements StudentService{
 		se.setGender(entity.getGender());
 		se.setMobileNumber(entity.getMobileNumber());
 		se.setSemester(entity.getSemester());
-		se.setSubjectId(entity.getSubjectId());
-		se.setSubjectName(entity.getSubjectName());
+		se.setAttendanceList(entity.getAttendanceList());
+		se.setCourse(entity.getCourse());
+		se.setFaculty(entity.getFaculty());
 		
 		return studentRepository.save(se);
 	}

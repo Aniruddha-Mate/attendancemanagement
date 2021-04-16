@@ -7,14 +7,18 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -31,13 +35,14 @@ public class FacultyEntity {
 	@Size(min=5, max = 30, message = "Not a valid name")
     private String facultyName;
     
-    @OneToMany(cascade=CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="facultyentity")
   	private List<SubjectEntity> subjectList;
 
-    
-    @OneToMany(cascade=CascadeType.ALL,mappedBy="faculty")
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="facultyentity")
 	private List<StudentEntity> studentList;
-    
+   
     
 
 	public List<SubjectEntity> getSubjectList() {
@@ -80,6 +85,12 @@ public class FacultyEntity {
 		this.facultyName = facultyName;
 		this.subjectList = subjectList;
 		this.studentList = studentList;
+	}
+	
+	
+
+	public FacultyEntity() {
+		super();
 	}
 
 	@Override

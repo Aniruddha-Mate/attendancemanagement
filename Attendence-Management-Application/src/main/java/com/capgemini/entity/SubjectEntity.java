@@ -9,11 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="Subjects")
@@ -36,16 +39,38 @@ public class SubjectEntity {
 	@Size(max = 50)
 	private String description;
 	
-	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	@JoinColumn(name="courseId")
-	private CourseEntity Course;
+	@JsonIgnore
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="course_Id")
+	private CourseEntity course;
+	public int getCourseId() {
+    	return course.getCourseId();
+    }
+	
+	@JsonIgnore
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="faculty_Id")
+	private FacultyEntity facultyentity;
+	
+	public int getFacultyId() {
+		return facultyentity.getFacultyId();
+	}
+		
+	public FacultyEntity getFacultyentity() {
+		return facultyentity;
+	}
+
+	public void setFacultyentity(FacultyEntity facultyentity) {
+		this.facultyentity = facultyentity;
+	}
+
 
 	public CourseEntity getCourse() {
-		return Course;
+		return course;
 	}
 
 	public void setCourse(CourseEntity course) {
-		Course = course;
+		this.course = course;
 	}
 
 	public int getSubjectId() {
@@ -82,19 +107,25 @@ public class SubjectEntity {
 
 	public SubjectEntity(int subjectId,
 			@NotEmpty @Size(max = 15, message = "Not a valid subject name") String subjectName,
-			@NotEmpty String subject_semester, @NotEmpty @Size(max = 50) String description, CourseEntity course) {
+			@NotEmpty String subject_semester, @NotEmpty @Size(max = 50) String description, CourseEntity courseId) {
 		super();
 		this.subjectId = subjectId;
 		this.subjectName = subjectName;
 		this.subject_semester = subject_semester;
 		this.description = description;
-		Course = course;
+		this.course = courseId;
+	}
+	
+	
+
+	public SubjectEntity() {
+		super();
 	}
 
 	@Override
 	public String toString() {
 		return "SubjectEntity [subjectId=" + subjectId + ", subjectName=" + subjectName + ", subject_semester="
-				+ subject_semester + ", description=" + description + ", Course=" + Course + "]";
+				+ subject_semester + ", description=" + description + ", Course=" + course + "]";
 	}
 
 	
