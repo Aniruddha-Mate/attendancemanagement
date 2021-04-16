@@ -1,6 +1,7 @@
 package com.capgemini.entity;
 
-import java.sql.Date;
+
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,24 +10,32 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+
 
 @Entity
-@Table(name = "Attendances")
+@Table(name = "Attendance")
 public class AttendanceEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="attendances_generations")
-	@SequenceGenerator(name="attendances_generations", sequenceName = "attendances_sequences", allocationSize=1)	
+	@SequenceGenerator(name="attendances_generations",sequenceName="attendances_sequences",allocationSize=1)
 	private int attendanceId;
 
-	@NotEmpty(message="Please Enter Valid Semester")
+    @NotEmpty(message="Please Enter Valid Semester")
 	private String semester;
 	
-	private Date currentDate;
+    @NotNull
+    private LocalDate currentDate;
 	
-	@NotEmpty(message="Please Enter Valid Status (Present/Absent)")
+    @NotEmpty(message="Please Enter Valid Status (Present/Absent)")
+    @Pattern(regexp="(absent|Absent|present|Present)", message="Please enter valid Status")
 	private String status;
-	
+    
+    
+    //Getters and Setters
 	public int getAttendanceId() {
 		return attendanceId;
 	}
@@ -43,12 +52,6 @@ public class AttendanceEntity {
 		this.semester = semester;
 	}
 
-	
-	  public Date getCurrentDate() { return currentDate; }
-	  
-	  public void setCurrentDate(Date currentDate) { this.currentDate = currentDate; }
-	 
-
 	public String getStatus() {
 		return status;
 	}
@@ -57,18 +60,16 @@ public class AttendanceEntity {
 		this.status = status;
 	}
 
-	
-	/*
-	 * @ManyToOne(fetch = FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name = "Attendance_Subject") private SubjectEntity subjectId;
-	 * 
-	 * @ManyToOne(fetch = FetchType.LAZY)
-	 * 
-	 * @Column(name = "student_roll_no") private long studentRollNo;
-	 */
-	
-	
+	public LocalDate getCurrentDate() {
+		return currentDate;
+	}
 
+	public void setCurrentDate(LocalDate currentDate) {
+		this.currentDate = currentDate;
+	}
 
 }
+
+
+
+

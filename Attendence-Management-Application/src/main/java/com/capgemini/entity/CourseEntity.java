@@ -22,10 +22,11 @@ public class CourseEntity {
 	
 	@Column(name = "course_name")
 	@NotEmpty(message="Please Enter Valid Course Name")
+	@Size(min = 2, max=50, message="Course Name length should be between 2 to 50 characters")
 	private String courseName;
-
-	@NotEmpty
-	@Size(min = 10, max = 50, message = "Please Enter Valid Course Description")
+    
+	@NotEmpty(message = "Please Enter Valid Course Description")
+	@Size(min = 10, max = 100, message = "Description length should be between 10 to 100 characters")
 	private String description;
 	
 	/*
