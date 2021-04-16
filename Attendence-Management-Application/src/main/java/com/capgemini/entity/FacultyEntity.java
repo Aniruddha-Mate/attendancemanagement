@@ -31,8 +31,22 @@ public class FacultyEntity {
 	@Size(min=5, max = 30, message = "Not a valid name")
     private String facultyName;
     
+    @OneToMany(cascade=CascadeType.ALL)
+  	private List<SubjectEntity> subjectList;
+
+    
     @OneToMany(cascade=CascadeType.ALL,mappedBy="faculty")
 	private List<StudentEntity> studentList;
+    
+    
+
+	public List<SubjectEntity> getSubjectList() {
+		return subjectList;
+	}
+
+	public void setSubjectList(List<SubjectEntity> subjectList) {
+		this.subjectList = subjectList;
+	}
 
 	public List<StudentEntity> getStudentList() {
 		return studentList;
@@ -60,21 +74,19 @@ public class FacultyEntity {
 
 	public FacultyEntity(int facultyId,
 			@NotEmpty @Size(min = 5, max = 30, message = "Not a valid name") String facultyName,
-			List<StudentEntity> studentList) {
+			List<SubjectEntity> subjectList, List<StudentEntity> studentList) {
 		super();
 		this.facultyId = facultyId;
 		this.facultyName = facultyName;
+		this.subjectList = subjectList;
 		this.studentList = studentList;
 	}
 
 	@Override
 	public String toString() {
-		return "FacultyEntity [facultyId=" + facultyId + ", facultyName=" + facultyName + ", studentList=" + studentList
-				+ "]";
+		return "FacultyEntity [facultyId=" + facultyId + ", facultyName=" + facultyName + ", subjectList=" + subjectList
+				+ ", studentList=" + studentList + "]";
 	}
-	
-
-
 
 	
 	
