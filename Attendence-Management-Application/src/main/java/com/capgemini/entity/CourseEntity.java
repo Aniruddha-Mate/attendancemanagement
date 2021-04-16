@@ -1,10 +1,14 @@
 package com.capgemini.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -29,12 +33,16 @@ public class CourseEntity {
 	@Size(min = 10, max = 100, message = "Description length should be between 10 to 100 characters")
 	private String description;
 	
-	/*
-	 * @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy =
-	 * "courseId") private List<SubjectEntity> subjectId;
-	 * 
-	 * @OneToOne(mappedBy = "courseId") private StudentEntity studentId;
-	 */
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="Course")
+	private List<SubjectEntity> subList;
+
+	public List<SubjectEntity> getSubList() {
+		return subList;
+	}
+
+	public void setSubList(List<SubjectEntity> subList) {
+		this.subList = subList;
+	}
 
 	public int getCourseId() {
 		return courseId;
@@ -60,22 +68,22 @@ public class CourseEntity {
 		this.description = description;
 	}
 
-	/*
-	 * public List<SubjectEntity> getSubjectId() { return subjectId; }
-	 * 
-	 * public void setSubjectId(List<SubjectEntity> subjectId) { this.subjectId =
-	 * subjectId; }
-	 * 
-	 * public StudentEntity getStudentId() { return studentId; }
-	 * 
-	 * public void setStudentId(StudentEntity studentId) { this.studentId =
-	 * studentId; }
-	 */
-	
-	@Override
-	public String toString() {
-		return "CoursesEntity [courseId=" + courseId + ", courseName=" + courseName + ", description=" + description
-				+ ",]";
+	public CourseEntity(int courseId,
+			@NotEmpty(message = "Please Enter Valid Course Name") @Size(min = 2, max = 50, message = "Course Name length should be between 2 to 50 characters") String courseName,
+			@NotEmpty(message = "Please Enter Valid Course Description") @Size(min = 10, max = 100, message = "Description length should be between 10 to 100 characters") String description,
+			List<SubjectEntity> subList) {
+		super();
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.description = description;
+		this.subList = subList;
 	}
 
+	@Override
+	public String toString() {
+		return "CourseEntity [courseId=" + courseId + ", courseName=" + courseName + ", description=" + description
+				+ ", subList=" + subList + "]";
+	}
+
+	
 }
