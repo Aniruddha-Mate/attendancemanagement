@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.entity.SubjectEntity;
+import com.capgemini.exception.DuplicateRecordException;
+import com.capgemini.exception.RecordNotFoundException;
+import com.capgemini.exception.SubjectNotFoundException;
 import com.capgemini.service.SubjectService;
 
 @RestController
@@ -27,7 +30,7 @@ public class SubjectController {
 	SubjectService subServices;
 	
 	@PostMapping(path="/addSubject")
-	public ResponseEntity<SubjectEntity> addSubject(@Valid @RequestBody SubjectEntity se)
+	public ResponseEntity<SubjectEntity> addSubject(@Valid @RequestBody SubjectEntity se) throws DuplicateRecordException
 	{
 		SubjectEntity se1 = subServices.addSubject(se);
 		
@@ -42,7 +45,7 @@ public class SubjectController {
 		return s1;
 	}
 	@PutMapping(path="/updateSubjectById/{subjectId}")
-	public ResponseEntity<SubjectEntity> updateSubjectById(@Valid @PathVariable int subjectId, @Valid @RequestBody SubjectEntity fe)
+	public ResponseEntity<SubjectEntity> updateSubjectById(@Valid @PathVariable int subjectId, @Valid @RequestBody SubjectEntity fe) throws SubjectNotFoundException
 	{
 		SubjectEntity se = subServices.updateSubjectById(subjectId, fe);
 		ResponseEntity re = new ResponseEntity<SubjectEntity>(se, HttpStatus.ACCEPTED);
@@ -50,7 +53,7 @@ public class SubjectController {
 	}
 	
 	@GetMapping(path="/getSubjectById/{subjectId}")
-	public ResponseEntity<SubjectEntity> getSubjectById(@Valid @PathVariable int subjectId)
+	public ResponseEntity<SubjectEntity> getSubjectById(@Valid @PathVariable int subjectId) throws SubjectNotFoundException
 	{
 		SubjectEntity se = subServices.getSubjectById(subjectId);
 		ResponseEntity re = new ResponseEntity<SubjectEntity>(se, HttpStatus.FOUND);
@@ -67,7 +70,7 @@ public class SubjectController {
 		
 	}
 	@DeleteMapping(path="/deleteSubject/{subjectId}")
-	public ResponseEntity<String> deleteSubById(@Valid @PathVariable int subjectId)
+	public ResponseEntity<String> deleteSubById(@Valid @PathVariable int subjectId) throws RecordNotFoundException
 	{
 		subServices.deleteSubById(subjectId);
 		

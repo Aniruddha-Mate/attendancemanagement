@@ -2,59 +2,82 @@ package com.capgemini.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.entity.SubjectEntity;
+import com.capgemini.exception.DuplicateRecordException;
+import com.capgemini.exception.RecordNotFoundException;
+import com.capgemini.exception.StudentNotFoundException;
+import com.capgemini.exception.SubjectNotFoundException;
 import com.capgemini.repository.SubjectRepository;
 
 @Service
 public class SubjectServiceImpl implements SubjectService{
 	
 	@Autowired
-	SubjectRepository srepo;
-
+	SubjectRepository subjectRepository;
+	
 	@Override
-	public SubjectEntity addSubject(SubjectEntity entity) {
-		
-		SubjectEntity se = (SubjectEntity) srepo.save(entity);		
-		return se;
+	public SubjectEntity addSubject(SubjectEntity entity) throws DuplicateRecordException{
+		List<SubjectEntity> sub=this.getAllSubjects();
+		for(SubjectEntity subjectentity:sub)
+		{
+			if(subjectentity.getSubjectName().equals(entity.getSubjectName()))
+			{
+				throw new DuplicateRecordException("The name of Subject is already exist......Provide different SubjectName");
+			}
+		}
+		SubjectEntity subjectentity = (SubjectEntity) subjectRepository.save(entity);		
+		return subjectentity;
 	}
 
 	@Override
 	public String deleteSubject(SubjectEntity entity) {
-		srepo.delete(entity);
+		subjectRepository.delete(entity);
 		return "Deleted";
 	}
+	
+	  @Override 
+	  public String deleteSubById(int subjectId) 
+	  {
+		  subjectRepository.findById(subjectId).orElse(null); 
+		  subjectRepository.deleteById(subjectId);
+		  return "Deleted"; 
+	  }
+	 
+	
+	
+	
 	@Override
-	public String deleteSubById(int subjectId) {
-		SubjectEntity se=srepo.findById(subjectId).orElse(null);
-		srepo.deleteById(subjectId);
-		return "Deleted";
-	}
-	@Override
-	public SubjectEntity getSubjectById(int subjectId) {
-      SubjectEntity se = srepo.findById(subjectId).orElse(null);
-		return se;
+	public SubjectEntity getSubjectById(int subjectId) throws SubjectNotFoundException {
+		Supplier<SubjectNotFoundException> supplier=()->new SubjectNotFoundException("Subject not found with this id");
+		SubjectEntity subjectentity = subjectRepository.findById(subjectId).orElseThrow(supplier);
+		return subjectentity;
 	}
 	@Override
 	public List<SubjectEntity> getAllSubjects() {
-		List<SubjectEntity> se = new ArrayList<SubjectEntity>();
-		se = srepo.findAll();		
-		return se;
+		List<SubjectEntity> subjectentity = new ArrayList<SubjectEntity>();
+		subjectentity = subjectRepository.findAll();		
+		return subjectentity;
 	}
 
 	@Override
-	public SubjectEntity updateSubjectById(int subjectId, SubjectEntity fe) {
-		SubjectEntity se = srepo.findById(subjectId).orElse(null);
+	public SubjectEntity updateSubjectById(int subjectId, SubjectEntity fe) throws SubjectNotFoundException{
+		Supplier<SubjectNotFoundException> supplier=()->new SubjectNotFoundException("Subject of " + subjectId + " id is not present in database");
+		SubjectEntity se = subjectRepository.findById(subjectId).orElseThrow(supplier);
 		se.setSubjectName(fe.getSubjectName());
 		se.setSubject_semester(fe.getSubject_semester());
 		se.setDescription(fe.getDescription());
-		srepo.save(se);
+		subjectRepository.save(se);
 		return se;
 	}
+
+
 	
+
 	
 
 }
