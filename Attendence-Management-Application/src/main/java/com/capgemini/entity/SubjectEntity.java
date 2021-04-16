@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -26,7 +25,7 @@ public class SubjectEntity {
 	@Size(max = 15, message = "Not a valid subject name")
 	private String subjectName;
 	
-	@NotNull
+	@NotEmpty
 	private String subject_semester;
 	
 	@NotEmpty
