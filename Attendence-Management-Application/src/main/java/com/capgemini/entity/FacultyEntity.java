@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -21,7 +22,8 @@ import javax.validation.constraints.Size;
 public class FacultyEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="faculties_gen")
+	@SequenceGenerator(name="faculties_gen", sequenceName = "faculties_sequence", allocationSize=1)
 	private int facultyId;
 	
 	

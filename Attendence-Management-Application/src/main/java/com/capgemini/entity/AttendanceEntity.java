@@ -19,7 +19,7 @@ import javax.validation.constraints.NotEmpty;
 public class AttendanceEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int attendanceId;
 
 	@NotEmpty(message="Please Enter Valid Semester")

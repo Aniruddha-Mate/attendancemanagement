@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 public class SubjectEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int subjectId;
 	
 	@Column(name="subject_name")
@@ -26,7 +26,7 @@ public class SubjectEntity {
 	private String subjectName;
 	
 	@NotNull
-	private int subject_semester;
+	private String subject_semester;
 	
 	@NotEmpty
 	@Size(max = 50)
@@ -48,11 +48,11 @@ public class SubjectEntity {
 		this.subjectName = subjectName;
 	}
 
-	public int getSubject_semester() {
+	public String getSubject_semester() {
 		return subject_semester;
 	}
 
-	public void setSubject_semester(int subject_semester) {
+	public void setSubject_semester(String subject_semester) {
 		this.subject_semester = subject_semester;
 	}
 	

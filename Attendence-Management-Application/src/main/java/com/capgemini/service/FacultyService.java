@@ -3,6 +3,8 @@ package com.capgemini.service;
 import java.util.List;
 
 import com.capgemini.entity.FacultyEntity;
+import com.capgemini.exception.FacultyNotFoundException;
+import com.capgemini.exception.RecordNotFoundException;
 
 public interface FacultyService {
 	
@@ -10,11 +12,11 @@ public interface FacultyService {
 	
 	public String deleteFaculty(FacultyEntity entity);
 
-	public FacultyEntity getFacultyById(int facultyId);
+	public FacultyEntity getFacultyById(int facultyId) throws FacultyNotFoundException;
 
-	public String deleteFacultyById(int facultyId);
+	public String deleteFacultyById(int facultyId) throws RecordNotFoundException;
 
 	public List<FacultyEntity> getAllFaculty();
 
-	FacultyEntity updateFacultyById(int facultyId, FacultyEntity se);
+	FacultyEntity updateFacultyById(int facultyId, FacultyEntity se) throws FacultyNotFoundException;
 }

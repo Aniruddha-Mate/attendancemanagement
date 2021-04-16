@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capgemini.entity.AttendanceEntity;
 import com.capgemini.entity.FacultyEntity;
+import com.capgemini.exception.FacultyNotFoundException;
+import com.capgemini.exception.RecordNotFoundException;
 import com.capgemini.service.FacultyService;
 
 @RestController
@@ -43,14 +44,14 @@ public class FacultyController {
 		return re;
 	}
 	@GetMapping(path="/getFacultyById/{facultyId}")
-	public ResponseEntity<FacultyEntity> getFacultyById(@Valid @PathVariable int facultyId)
+	public ResponseEntity<FacultyEntity> getFacultyById(@Valid @PathVariable int facultyId) throws FacultyNotFoundException
 	{
 		FacultyEntity fe = faclServices.getFacultyById(facultyId);
 		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.OK);
 		return re;
 	}
 	@DeleteMapping(path="/deleteFacultyById/{facultyId}")
-	public ResponseEntity<String> deleteFacultyById(@Valid @PathVariable int facultyId)
+	public ResponseEntity<String> deleteFacultyById(@Valid @PathVariable int facultyId) throws RecordNotFoundException
 	{
 		faclServices.deleteFacultyById(facultyId);
 		ResponseEntity re = new ResponseEntity<String>("Deleted by Id from Database", HttpStatus.OK);
@@ -66,7 +67,7 @@ public class FacultyController {
 		
 	}
 	@PutMapping(path="/updateFacultyById/{facultyId}")
-	public ResponseEntity<FacultyEntity> updateFacultyById(@Valid @PathVariable int facultyId, @Valid @RequestBody FacultyEntity se)
+	public ResponseEntity<FacultyEntity> updateFacultyById(@Valid @PathVariable int facultyId, @Valid @RequestBody FacultyEntity se) throws FacultyNotFoundException
 	{
 		FacultyEntity fe = faclServices.updateFacultyById(facultyId, se);
 		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.OK);

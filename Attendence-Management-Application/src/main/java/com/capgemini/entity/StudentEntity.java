@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,7 +26,7 @@ public class StudentEntity {
 	
 	@Id
 	@Column(name = "roll_no")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int studentId;
 	
 	@Column(name = "first_name")
@@ -42,16 +43,17 @@ public class StudentEntity {
 	@Column(name = "DOB")
 	private Date dateOfBirth;
 	
+	@NotEmpty
+	@Pattern(regexp="^(?:m|M|male|Male|f|F|female|Female)$", message="Invalid Entry")
 	private String gender;
 	
 	@Column(name = "mobile_no")
-	@NotNull
-	@Min(value = 99999999, message="invalid number")
-	@Max(value = 999999999, message="invalid number")
-	private long mobileNumber;
+	@NotEmpty
+	@Pattern(regexp="(^[6-9][0-9]{9}$)", message="Invalid Mobile Number")
+	private String mobileNumber;
 	
-	@NotNull
-	private int semester;
+	@NotEmpty
+	private String semester;
 	
 	@Column(name = "email_id")
 	@Email(message = "invalid email")
@@ -62,13 +64,14 @@ public class StudentEntity {
 	private String fatherEmailId;
 	
 	@Column(name = "father_mobile_number")
-	@NotNull
-	@Min(value = 99999999, message="invalid number")
-	@Max(value = 999999999, message="invalid number")
-	private long fatherMobileNumber;
+	@NotEmpty
+	@Pattern(regexp="(^[6-9][0-9]{9}$)", message="Invalid Mobile Number")
+	private String fatherMobileNumber;
 	
+	@NotNull
 	private int subjectId;
 	
+	@NotEmpty
 	private String subjectName;
 
 	public int getId() {
@@ -111,19 +114,19 @@ public class StudentEntity {
 		this.gender = gender;
 	}
 
-	public long getMobileNumber() {
+	public String getMobileNumber() {
 		return mobileNumber;
 	}
 
-	public void setMobileNumber(long mobileNumber) {
+	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public int getSemester() {
+	public String getSemester() {
 		return semester;
 	}
 
-	public void setSemester(int semester) {
+	public void setSemester(String semester) {
 		this.semester = semester;
 	}
 
@@ -143,11 +146,11 @@ public class StudentEntity {
 		this.fatherEmailId = fatherEmailId;
 	}
 
-	public long getFatherMobileNumber() {
+	public String getFatherMobileNumber() {
 		return fatherMobileNumber;
 	}
 
-	public void setFatherMobileNumber(long fatherMobileNumber) {
+	public void setFatherMobileNumber(String fatherMobileNumber) {
 		this.fatherMobileNumber = fatherMobileNumber;
 	}
 
