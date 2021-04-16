@@ -31,7 +31,7 @@ public class SubjectController {
 	{
 		SubjectEntity se1 = subServices.addSubject(se);
 		
-		return new ResponseEntity<SubjectEntity>(se1,HttpStatus.OK);
+		return new ResponseEntity<SubjectEntity>(se1,HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping(path="/deleteSubject")
@@ -45,7 +45,7 @@ public class SubjectController {
 	public ResponseEntity<SubjectEntity> updateSubjectById(@Valid @PathVariable int subjectId, @Valid @RequestBody SubjectEntity fe)
 	{
 		SubjectEntity se = subServices.updateSubjectById(subjectId, fe);
-		ResponseEntity re = new ResponseEntity<SubjectEntity>(se, HttpStatus.OK);
+		ResponseEntity re = new ResponseEntity<SubjectEntity>(se, HttpStatus.ACCEPTED);
 		return re;
 	}
 	
@@ -53,7 +53,7 @@ public class SubjectController {
 	public ResponseEntity<SubjectEntity> getSubjectById(@Valid @PathVariable int subjectId)
 	{
 		SubjectEntity se = subServices.getSubjectById(subjectId);
-		ResponseEntity re = new ResponseEntity<SubjectEntity>(se, HttpStatus.OK);
+		ResponseEntity re = new ResponseEntity<SubjectEntity>(se, HttpStatus.FOUND);
 		return re;
 	}
 	

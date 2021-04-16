@@ -33,7 +33,7 @@ public class FacultyController {
 	{
 		FacultyEntity se1 = faclServices.addFaculty(se);
 		
-		return new ResponseEntity<FacultyEntity>(se1,HttpStatus.OK);
+		return new ResponseEntity<FacultyEntity>(se1,HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping(path="/deleteFaculty")
@@ -47,7 +47,7 @@ public class FacultyController {
 	public ResponseEntity<FacultyEntity> getFacultyById(@Valid @PathVariable int facultyId) throws FacultyNotFoundException
 	{
 		FacultyEntity fe = faclServices.getFacultyById(facultyId);
-		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.OK);
+		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.FOUND);
 		return re;
 	}
 	@DeleteMapping(path="/deleteFacultyById/{facultyId}")
@@ -70,7 +70,7 @@ public class FacultyController {
 	public ResponseEntity<FacultyEntity> updateFacultyById(@Valid @PathVariable int facultyId, @Valid @RequestBody FacultyEntity se) throws FacultyNotFoundException
 	{
 		FacultyEntity fe = faclServices.updateFacultyById(facultyId, se);
-		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.OK);
+		ResponseEntity re = new ResponseEntity<FacultyEntity>(fe, HttpStatus.ACCEPTED);
 		return re;
 	}
 }

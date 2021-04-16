@@ -29,13 +29,13 @@ public class AttendanceController {
 	@PostMapping(path="/addAttendance")
 	public ResponseEntity<AttendanceEntity> addAttend(@Valid @RequestBody AttendanceEntity ae)
 	{
-		return new ResponseEntity<AttendanceEntity>(attService.addAttendance(ae),HttpStatus.OK);
+		return new ResponseEntity<AttendanceEntity>(attService.addAttendance(ae),HttpStatus.CREATED);
 	}
 	
 	@PutMapping(path="/updateAttendance/{attendanceId}")
 	public ResponseEntity<AttendanceEntity> updateAttendById(@Valid @PathVariable int attendanceId, @Valid @RequestBody AttendanceEntity entity)
 	{
-		return new ResponseEntity<AttendanceEntity>(attService.updateAttendanceById(attendanceId,entity),HttpStatus.OK);
+		return new ResponseEntity<AttendanceEntity>(attService.updateAttendanceById(attendanceId,entity),HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping(path="/deleteAttendance")
@@ -52,7 +52,7 @@ public class AttendanceController {
 	public ResponseEntity<AttendanceEntity> getAttendanceById(@Valid @PathVariable int attendanceId)
 	{
 		AttendanceEntity ae = attService.getAttendanceById(attendanceId);
-		ResponseEntity re = new ResponseEntity<AttendanceEntity>(ae, HttpStatus.OK);
+		ResponseEntity re = new ResponseEntity<AttendanceEntity>(ae, HttpStatus.FOUND);
 		return re;
 	}
 	@DeleteMapping(path="/deleteAttendance/{attendanceId}")

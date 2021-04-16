@@ -32,14 +32,14 @@ public class CourseController {
 	{
 		CourseEntity se1 = courServices.addCourse(se);
 		
-		return new ResponseEntity<CourseEntity>(se1,HttpStatus.OK);
+		return new ResponseEntity<CourseEntity>(se1,HttpStatus.CREATED);
 	}
 
 		
 	@PutMapping(path="/updateCourse/{courseId}")
 	public ResponseEntity<CourseEntity> updateByCourseId(@Valid @PathVariable int courseId, @Valid @RequestBody CourseEntity entity)
 	{
-		return new ResponseEntity<CourseEntity>(courServices.updateByCourseId(courseId,entity),HttpStatus.OK);
+		return new ResponseEntity<CourseEntity>(courServices.updateByCourseId(courseId,entity),HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping(path="/deleteByCourseId/{courseId}")
@@ -59,7 +59,7 @@ public class CourseController {
 	@GetMapping(path="/getByCourseId/{courseId}")
 	public ResponseEntity<CourseEntity> getCourseById(@Valid @PathVariable int courseId)
 	{
-		return new ResponseEntity<CourseEntity>(courServices.getCourseById(courseId),HttpStatus.OK);
+		return new ResponseEntity<CourseEntity>(courServices.getCourseById(courseId),HttpStatus.FOUND);
 	}
 	
 	@DeleteMapping(path="/deleteAllCourse")

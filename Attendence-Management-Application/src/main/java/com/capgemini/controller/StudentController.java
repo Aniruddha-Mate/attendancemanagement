@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.entity.StudentEntity;
+import com.capgemini.exception.RecordNotFoundException;
+import com.capgemini.exception.StudentNotFoundException;
 import com.capgemini.service.StudentService;
 
 @RestController
@@ -25,7 +27,7 @@ public class StudentController {
 	StudentService studService;
 	
 	@GetMapping("/get/{studentId}")
-	public ResponseEntity<StudentEntity> getStudentById(@Valid @PathVariable int studentId)
+	public ResponseEntity<StudentEntity> getStudentById(@Valid @PathVariable int studentId) throws StudentNotFoundException
 	{
 		return new ResponseEntity<StudentEntity>(studService.getStudentById(studentId),HttpStatus.FOUND);
 	}
@@ -50,7 +52,7 @@ public class StudentController {
 	
 
 	@DeleteMapping("/delete/{studentId}")
-	public ResponseEntity<String> deleteStudent(@Valid @PathVariable int studentId) 
+	public ResponseEntity<String> deleteStudent(@Valid @PathVariable int studentId) throws RecordNotFoundException
 	{
 		return new ResponseEntity<String>(studService.deleteStudent(studentId),HttpStatus.ACCEPTED);
 	}
