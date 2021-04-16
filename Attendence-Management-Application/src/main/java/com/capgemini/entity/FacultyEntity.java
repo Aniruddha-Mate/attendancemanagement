@@ -1,16 +1,12 @@
 package com.capgemini.entity;
 
-import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -25,7 +21,6 @@ public class FacultyEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="faculties_generations")
 	@SequenceGenerator(name="faculties_generations", sequenceName = "faculties_sequences", allocationSize=1)
 	private int facultyId;
-	
 	
     @Column(name = "faculty_user_name") 
 	@NotEmpty

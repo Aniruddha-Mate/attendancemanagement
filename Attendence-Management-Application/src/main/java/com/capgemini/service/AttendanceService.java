@@ -2,8 +2,6 @@ package com.capgemini.service;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
 import com.capgemini.entity.AttendanceEntity;
 
 public interface AttendanceService {
