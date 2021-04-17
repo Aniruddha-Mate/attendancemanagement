@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.capgemini.entity.StudentEntity;
 import com.capgemini.exception.RecordNotFoundException;
 import com.capgemini.exception.StudentNotFoundException;
+import com.capgemini.repository.FacultyRepository;
 import com.capgemini.repository.StudentRepository;
 @Service
 public class StudentServiceImpl implements StudentService{
@@ -15,6 +16,9 @@ public class StudentServiceImpl implements StudentService{
 	
 	@Autowired
 	StudentRepository studentRepository;
+	
+	@Autowired
+	FacultyRepository facultyRepository;
 
 	@Override
 	public StudentEntity getStudentById(int studentId) throws StudentNotFoundException{
@@ -26,6 +30,7 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public List<StudentEntity> getStudents() {
 		// TODO Auto-generated method stub
+		
 		return studentRepository.findAll();
 	}
 

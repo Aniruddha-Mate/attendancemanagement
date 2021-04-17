@@ -73,7 +73,7 @@ public class StudentEntity {
 	@Pattern(regexp="(^[6-9][0-9]{9}$)", message="Invalid Mobile Number")
 	private String fatherMobileNumber;
 	
-	
+
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="faculty_id")
 	private FacultyEntity facultyentity;
