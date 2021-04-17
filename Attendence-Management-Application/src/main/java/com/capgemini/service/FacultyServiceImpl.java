@@ -55,7 +55,7 @@ public class FacultyServiceImpl implements FacultyService {
 		Supplier<FacultyNotFoundException> supplier=()->new FacultyNotFoundException("This Faculty is not present");
 		FacultyEntity fe = facultyRepository.findById(facultyId).orElseThrow(supplier);
 		fe.setFacultyName(se.getFacultyName());
-		fe.setStudentList(se.getStudentList());
+//		fe.setStudentList(se.getStudentList());
 		fe.setSubjectList(se.getSubjectList());
 		
 		facultyRepository.save(fe);

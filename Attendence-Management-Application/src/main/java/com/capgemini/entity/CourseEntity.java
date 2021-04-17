@@ -37,8 +37,21 @@ public class CourseEntity {
 	
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="course")
+	private List<StudentEntity> studentList;
+	
+	
+	@JsonIgnore
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="course")
 	private List<SubjectEntity> subList;
 
+	public List<StudentEntity> getStudentList() {
+		return studentList;
+	}
+
+	public void setStudentList(List<StudentEntity> studentList) {
+		this.studentList = studentList;
+	}
+		
 	public List<SubjectEntity> getSubList() {
 		return subList;
 	}
@@ -74,15 +87,16 @@ public class CourseEntity {
 	public CourseEntity(int courseId,
 			@NotEmpty(message = "Please Enter Valid Course Name") @Size(min = 2, max = 50, message = "Course Name length should be between 2 to 50 characters") String courseName,
 			@NotEmpty(message = "Please Enter Valid Course Description") @Size(min = 10, max = 100, message = "Description length should be between 10 to 100 characters") String description,
-			List<SubjectEntity> subList) {
+			List<StudentEntity> studentList, List<SubjectEntity> subList) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
 		this.description = description;
+		this.studentList = studentList;
 		this.subList = subList;
 	}
-	
 
+	
 	public CourseEntity() {
 		super();
 	}
@@ -90,8 +104,9 @@ public class CourseEntity {
 	@Override
 	public String toString() {
 		return "CourseEntity [courseId=" + courseId + ", courseName=" + courseName + ", description=" + description
-				+ ", subList=" + subList + "]";
+				+ ", studentList=" + studentList + ", subList=" + subList + "]";
 	}
 
+	
 	
 }

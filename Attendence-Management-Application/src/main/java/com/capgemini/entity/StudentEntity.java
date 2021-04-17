@@ -74,9 +74,9 @@ public class StudentEntity {
 	private String fatherMobileNumber;
 	
 
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="faculty_id")
-	private FacultyEntity facultyentity;
+//	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+//	@JoinColumn(name="faculty_id")
+//	private FacultyEntity facultyentity;
 //	public int getFacultyId() {
 //		return facultyentity.getFacultyId();
 //	}
@@ -86,9 +86,13 @@ public class StudentEntity {
 	private List<AttendanceEntity> attendanceList;
 	
 	@JsonIgnore
-	@OneToOne(cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="course_id")
 	private CourseEntity course;
+	
+	public int getCourseId() {
+		return course.getCourseId();
+	}
 	
 
 	public int getStudentId() {
@@ -99,15 +103,15 @@ public class StudentEntity {
 		this.studentId = studentId;
 	}
 	
-	@JsonIgnore
-	public FacultyEntity getFaculty() {
-		return facultyentity;
-	}
-	
-	@JsonIgnore
-	public void setFaculty(FacultyEntity faculty) {
-		this.facultyentity = faculty;
-	}
+//	@JsonIgnore
+//	public FacultyEntity getFaculty() {
+//		return facultyentity;
+//	}
+//	
+//	@JsonIgnore
+//	public void setFaculty(FacultyEntity faculty) {
+//		this.facultyentity = faculty;
+//	}
 
 	public List<AttendanceEntity> getAttendanceList() {
 		return attendanceList;
@@ -203,8 +207,8 @@ public class StudentEntity {
 			@NotEmpty @Pattern(regexp = "(^[6-9][0-9]{9}$)", message = "Invalid Mobile Number") String mobileNumber,
 			@NotEmpty String semester, @Email(message = "invalid email") String emailId,
 			@Email(message = "invalid email") String fatherEmailId,
-			@NotEmpty @Pattern(regexp = "(^[6-9][0-9]{9}$)", message = "Invalid Mobile Number") String fatherMobileNumber,
-			FacultyEntity faculty, List<AttendanceEntity> attendanceList, CourseEntity course) {
+			@NotEmpty @Pattern(regexp = "(^[6-9][0-9]{9}$)", message = "Invalid Mobile Number") String fatherMobileNumber, 
+			List<AttendanceEntity> attendanceList, CourseEntity course) {
 		super();
 		this.studentId = studentId;
 		this.firstName = firstName;
@@ -216,7 +220,7 @@ public class StudentEntity {
 		this.emailId = emailId;
 		this.fatherEmailId = fatherEmailId;
 		this.fatherMobileNumber = fatherMobileNumber;
-		this.facultyentity = faculty;
+//		this.facultyentity = faculty;
 		this.attendanceList = attendanceList;
 		this.course = course;
 	}
@@ -232,7 +236,7 @@ public class StudentEntity {
 		return "StudentEntity [studentId=" + studentId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + ", mobileNumber=" + mobileNumber
 				+ ", semester=" + semester + ", emailId=" + emailId + ", fatherEmailId=" + fatherEmailId
-				+ ", fatherMobileNumber=" + fatherMobileNumber + ", faculty=" + facultyentity + ", attendanceList="
+				+ ", fatherMobileNumber=" + fatherMobileNumber + ", attendanceList="
 				+ attendanceList + ", course=" + course + "]";
 	}
 

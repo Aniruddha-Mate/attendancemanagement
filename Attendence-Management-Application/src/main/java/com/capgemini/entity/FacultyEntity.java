@@ -39,9 +39,9 @@ public class FacultyEntity {
     @OneToMany(cascade=CascadeType.ALL, mappedBy="facultyentity")
   	private List<SubjectEntity> subjectList;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="facultyentity")
-	private List<StudentEntity> studentList;
+//    @JsonIgnore
+//    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="facultyentity")
+//	private List<StudentEntity> studentList;
    
     
 
@@ -53,13 +53,13 @@ public class FacultyEntity {
 		this.subjectList = subjectList;
 	}
 
-	public List<StudentEntity> getStudentList() {
-		return studentList;
-	}
-
-	public void setStudentList(List<StudentEntity> studentList) {
-		this.studentList = studentList;
-	}
+//	public List<StudentEntity> getStudentList() {
+//		return studentList;
+//	}
+//
+//	public void setStudentList(List<StudentEntity> studentList) {
+//		this.studentList = studentList;
+//	}
 
 	public int getFacultyId() {
 		return facultyId;
@@ -79,12 +79,12 @@ public class FacultyEntity {
 
 	public FacultyEntity(int facultyId,
 			@NotEmpty @Size(min = 5, max = 30, message = "Not a valid name") String facultyName,
-			List<SubjectEntity> subjectList, List<StudentEntity> studentList) {
+			List<SubjectEntity> subjectList) {
 		super();
 		this.facultyId = facultyId;
 		this.facultyName = facultyName;
 		this.subjectList = subjectList;
-		this.studentList = studentList;
+//		this.studentList = studentList;
 	}
 	
 	
@@ -96,7 +96,7 @@ public class FacultyEntity {
 	@Override
 	public String toString() {
 		return "FacultyEntity [facultyId=" + facultyId + ", facultyName=" + facultyName + ", subjectList=" + subjectList
-				+ ", studentList=" + studentList + "]";
+				 + "]";
 	}
 
 	

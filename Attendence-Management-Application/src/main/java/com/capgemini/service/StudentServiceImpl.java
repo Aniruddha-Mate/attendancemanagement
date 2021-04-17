@@ -56,7 +56,7 @@ public class StudentServiceImpl implements StudentService{
 		se.setSemester(entity.getSemester());
 		se.setAttendanceList(entity.getAttendanceList());
 		se.setCourse(entity.getCourse());
-		se.setFaculty(entity.getFaculty());
+//		se.setFaculty(entity.getFaculty());
 		
 		return studentRepository.save(se);
 	}
