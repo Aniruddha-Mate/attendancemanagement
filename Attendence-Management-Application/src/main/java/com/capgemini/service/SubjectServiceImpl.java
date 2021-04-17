@@ -2,16 +2,18 @@ package com.capgemini.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.entity.SubjectEntity;
 import com.capgemini.exception.DuplicateRecordException;
+import com.capgemini.exception.RecordNotFoundException;
+import com.capgemini.exception.StudentNotFoundException;
 import com.capgemini.exception.SubjectNotFoundException;
-import com.capgemini.repository.CourseRepository;
-import com.capgemini.repository.FacultyRepository;
 import com.capgemini.repository.SubjectRepository;
 
 @Service
@@ -20,11 +22,6 @@ public class SubjectServiceImpl implements SubjectService{
 	@Autowired
 	SubjectRepository subjectRepository;
 	
-	@Autowired
-	FacultyRepository facultyRepository;
-	
-	@Autowired
-	CourseRepository courseRepository;
 	
 	@Override
 	public SubjectEntity addSubject(SubjectEntity entity) throws DuplicateRecordException{
@@ -36,25 +33,24 @@ public class SubjectServiceImpl implements SubjectService{
 				throw new DuplicateRecordException("The name of Subject is already exist......Provide different SubjectName");
 			}
 		}
-		
-		
-		
 		SubjectEntity subjectentity = (SubjectEntity) subjectRepository.save(entity);		
 		return subjectentity;
 	}
+
+	  @Override 
+	  public String deleteSubById(int subjectId) 
+	  {
+		  SubjectEntity subjectentity=subjectRepository.findById(subjectId).orElse(null); 
+		  subjectRepository.deleteById(subjectId);
+	  return "Deleted"; }
+	 
 	
-	@Override 
-	public String deleteSubById(int subjectId) 
-	{
-		subjectRepository.findById(subjectId).orElse(null); 
-		subjectRepository.deleteById(subjectId);
-		return "Deleted"; 
-	}
+	
 	
 	@Override
 	public SubjectEntity getSubjectById(int subjectId) throws SubjectNotFoundException {
 		Supplier<SubjectNotFoundException> supplier=()->new SubjectNotFoundException("Subject not found with this id");
-		SubjectEntity subjectentity = subjectRepository.findById(subjectId).orElseThrow(supplier);
+      SubjectEntity subjectentity = subjectRepository.findById(subjectId).orElseThrow(supplier);
 		return subjectentity;
 	}
 	@Override
@@ -71,11 +67,18 @@ public class SubjectServiceImpl implements SubjectService{
 		se.setSubjectName(fe.getSubjectName());
 		se.setSubject_semester(fe.getSubject_semester());
 		se.setDescription(fe.getDescription());
-		se.setCourse(fe.getCourse());
-		
 		subjectRepository.save(se);
 		return se;
 	}
+
+	@Override
+	public SubjectEntity findSubjectByName(String subjectName) {
+		return subjectRepository.findBysubjectNameIgnoreCase(subjectName);
+	}
+
+	
+	
+	
 
 
 	

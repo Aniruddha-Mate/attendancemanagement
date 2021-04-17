@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -39,6 +38,7 @@ public class SubjectEntity {
 	@Size(max = 50)
 	private String description;
 	
+
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="course_Id")
@@ -55,22 +55,21 @@ public class SubjectEntity {
 	public int getFacultyId() {
 		return facultyentity.getFacultyId();
 	}
-		
-	public FacultyEntity getFacultyentity() {
-		return facultyentity;
-	}
-
-	public void setFacultyentity(FacultyEntity facultyentity) {
-		this.facultyentity = facultyentity;
-	}
-
-
+	
 	public CourseEntity getCourse() {
 		return course;
 	}
 
 	public void setCourse(CourseEntity course) {
 		this.course = course;
+	}
+
+	public FacultyEntity getFacultyentity() {
+		return facultyentity;
+	}
+
+	public void setFacultyentity(FacultyEntity facultyentity) {
+		this.facultyentity = facultyentity;
 	}
 
 	public int getSubjectId() {
@@ -104,19 +103,21 @@ public class SubjectEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
+	
+	
 	public SubjectEntity(int subjectId,
 			@NotEmpty @Size(max = 15, message = "Not a valid subject name") String subjectName,
-			@NotEmpty String subject_semester, @NotEmpty @Size(max = 50) String description, CourseEntity courseId) {
+			@NotEmpty String subject_semester, @NotEmpty @Size(max = 50) String description, CourseEntity course,
+			FacultyEntity facultyentity) {
 		super();
 		this.subjectId = subjectId;
 		this.subjectName = subjectName;
 		this.subject_semester = subject_semester;
 		this.description = description;
-		this.course = courseId;
+		this.course = course;
+		this.facultyentity = facultyentity;
 	}
-	
-	
 
 	public SubjectEntity() {
 		super();
@@ -125,7 +126,8 @@ public class SubjectEntity {
 	@Override
 	public String toString() {
 		return "SubjectEntity [subjectId=" + subjectId + ", subjectName=" + subjectName + ", subject_semester="
-				+ subject_semester + ", description=" + description + ", Course=" + course + "]";
+				+ subject_semester + ", description=" + description + ", course=" + course + ", facultyentity="
+				+ facultyentity + "]";
 	}
 
 	
