@@ -39,7 +39,7 @@ public class SubjectEntity {
 	private String description;
 	
 
-	@JsonIgnore
+	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="course_Id")
 	private CourseEntity course;
@@ -47,7 +47,6 @@ public class SubjectEntity {
     	return course.getCourseId();
     }
 	
-	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="faculty_Id")
 	private FacultyEntity facultyentity;
@@ -55,19 +54,19 @@ public class SubjectEntity {
 	public int getFacultyId() {
 		return facultyentity.getFacultyId();
 	}
-	
+	@JsonIgnore
 	public CourseEntity getCourse() {
 		return course;
 	}
-
+	@JsonIgnore
 	public void setCourse(CourseEntity course) {
 		this.course = course;
 	}
-
+	@JsonIgnore
 	public FacultyEntity getFacultyentity() {
 		return facultyentity;
 	}
-
+	@JsonIgnore
 	public void setFacultyentity(FacultyEntity facultyentity) {
 		this.facultyentity = facultyentity;
 	}

@@ -36,7 +36,7 @@ public class FacultyEntity {
     private String facultyName;
     
     @JsonIgnore
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="facultyentity")
+    @OneToMany(fetch =FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="facultyentity")
   	private List<SubjectEntity> subjectList;
 
 //    @JsonIgnore

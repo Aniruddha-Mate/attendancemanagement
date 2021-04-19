@@ -1,4 +1,4 @@
-package com.capgemini.controller;
+package com.capgemini.exception;
 
 import java.util.HashMap;
 import java.util.Map;
